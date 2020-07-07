@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="s36-zj-Vc5">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Base Navigation Controller-->
+        <scene sceneID="yts-pO-PNi">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="s36-zj-Vc5" customClass="PLVECBaseNavigationController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5bf-ra-KL4">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="E4Y-eN-Z2B"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2ra-JL-swa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-922" y="115"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="t5q-hz-nqw"/>
+                        <viewControllerLayoutGuide type="bottom" id="aBT-7U-Ufg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wy-yb-8it">
+                                <rect key="frame" x="176" y="326" width="62" height="30"/>
+                                <state key="normal" title="观看直播"/>
+                                <connections>
+                                    <action selector="watchLiveBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q1v-C4-Amd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39O-OX-FSV">
+                                <rect key="frame" x="176" y="376" width="62" height="30"/>
+                                <state key="normal" title="观看回放"/>
+                                <connections>
+                                    <action selector="watchPlaybackBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SFL-vI-JdS"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bWQ-ZG-nxV">
+                                <rect key="frame" x="269" y="431" width="51" height="31"/>
+                                <connections>
+                                    <action selector="displayModeSwitchAction:" destination="BYZ-38-t0r" eventType="valueChanged" id="0Aw-8C-vGy"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全屏竖屏显示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F4W-7X-oak">
+                                <rect key="frame" x="155" y="436" width="104" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="appId" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="N69-oG-jcS">
+                                <rect key="frame" x="50" y="94" width="314" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="userId" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Man-oY-9Ob">
+                                <rect key="frame" x="50" y="136" width="314" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="appSecret" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mUY-bl-zEj">
+                                <rect key="frame" x="50" y="178" width="314" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="channelId" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ROl-Gj-ETX">
+                                <rect key="frame" x="50" y="220" width="314" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="vid" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="koJ-om-lje">
+                                <rect key="frame" x="50" y="262" width="314" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用默认参数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3v-ne-kKF">
+                                <rect key="frame" x="155" y="482" width="104" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ujg-XK-C4O">
+                                <rect key="frame" x="269" y="477" width="51" height="31"/>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ROl-Gj-ETX" firstAttribute="top" secondItem="mUY-bl-zEj" secondAttribute="bottom" constant="8" id="3Ef-R3-NbA"/>
+                            <constraint firstItem="ujg-XK-C4O" firstAttribute="leading" secondItem="a3v-ne-kKF" secondAttribute="trailing" constant="10" id="4fm-mV-wGH"/>
+                            <constraint firstItem="mUY-bl-zEj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="6Yr-j6-dgL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="koJ-om-lje" secondAttribute="trailing" constant="30" id="Atn-4x-K9Y"/>
+                            <constraint firstItem="bWQ-ZG-nxV" firstAttribute="leading" secondItem="F4W-7X-oak" secondAttribute="trailing" constant="10" id="DIM-M8-Ov1"/>
+                            <constraint firstItem="Man-oY-9Ob" firstAttribute="top" secondItem="N69-oG-jcS" secondAttribute="bottom" constant="8" id="DaL-xw-yJA"/>
+                            <constraint firstItem="koJ-om-lje" firstAttribute="top" secondItem="ROl-Gj-ETX" secondAttribute="bottom" constant="8" id="Gj9-qz-3dR"/>
+                            <constraint firstItem="koJ-om-lje" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="HYe-7G-xsP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mUY-bl-zEj" secondAttribute="trailing" constant="30" id="Jc5-BH-Omd"/>
+                            <constraint firstItem="7wy-yb-8it" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MJd-av-H3A"/>
+                            <constraint firstItem="F4W-7X-oak" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Oii-4f-3zt"/>
+                            <constraint firstItem="mUY-bl-zEj" firstAttribute="top" secondItem="Man-oY-9Ob" secondAttribute="bottom" constant="8" id="PVd-yg-AZ8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Man-oY-9Ob" secondAttribute="trailing" constant="30" id="Q9W-cs-Rhc"/>
+                            <constraint firstItem="Man-oY-9Ob" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="RKj-fq-FEh"/>
+                            <constraint firstItem="ROl-Gj-ETX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="THy-xT-g76"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="N69-oG-jcS" secondAttribute="trailing" constant="30" id="UPv-2v-9iW"/>
+                            <constraint firstItem="N69-oG-jcS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="URZ-9z-sUq"/>
+                            <constraint firstItem="39O-OX-FSV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YcI-YE-Bvi"/>
+                            <constraint firstItem="a3v-ne-kKF" firstAttribute="trailing" secondItem="F4W-7X-oak" secondAttribute="trailing" id="aWK-vT-WQ1"/>
+                            <constraint firstItem="7wy-yb-8it" firstAttribute="top" secondItem="koJ-om-lje" secondAttribute="bottom" constant="30" id="fl0-Lh-th6"/>
+                            <constraint firstItem="N69-oG-jcS" firstAttribute="top" secondItem="t5q-hz-nqw" secondAttribute="bottom" constant="50" id="lE7-ce-NIb"/>
+                            <constraint firstItem="bWQ-ZG-nxV" firstAttribute="centerY" secondItem="F4W-7X-oak" secondAttribute="centerY" id="no3-3Y-EZI"/>
+                            <constraint firstItem="39O-OX-FSV" firstAttribute="top" secondItem="7wy-yb-8it" secondAttribute="bottom" constant="20" id="pQ9-Uh-tHb"/>
+                            <constraint firstItem="a3v-ne-kKF" firstAttribute="top" secondItem="F4W-7X-oak" secondAttribute="bottom" constant="25" id="pRK-MJ-EOM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ROl-Gj-ETX" secondAttribute="trailing" constant="30" id="qpy-7m-Ppp"/>
+                            <constraint firstItem="F4W-7X-oak" firstAttribute="top" secondItem="39O-OX-FSV" secondAttribute="bottom" constant="30" id="r3e-Fl-hKW"/>
+                            <constraint firstItem="ujg-XK-C4O" firstAttribute="centerY" secondItem="a3v-ne-kKF" secondAttribute="centerY" id="x7G-0J-HA4"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="V9I-43-tY0"/>
+                    <connections>
+                        <outlet property="appIdTF" destination="N69-oG-jcS" id="7Ue-ZM-P9D"/>
+                        <outlet property="appSecretTF" destination="mUY-bl-zEj" id="Ibr-fx-QnK"/>
+                        <outlet property="channelIdTF" destination="ROl-Gj-ETX" id="JgJ-ue-3Kg"/>
+                        <outlet property="defaultParamSwitch" destination="ujg-XK-C4O" id="wKp-33-xC2"/>
+                        <outlet property="displayModeLable" destination="F4W-7X-oak" id="xPh-7g-SJS"/>
+                        <outlet property="displayModeSwitch" destination="bWQ-ZG-nxV" id="RpO-9l-fnx"/>
+                        <outlet property="userIdTF" destination="Man-oY-9Ob" id="48M-t2-bFP"/>
+                        <outlet property="vodIdTF" destination="koJ-om-lje" id="HfU-hY-vx7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Z5I-L3-Onf">
+                    <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="观看直播"/>
+                    <connections>
+                        <action selector="watchLiveBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N4u-qi-TEC"/>
+                    </connections>
+                </button>
+            </objects>
+            <point key="canvasLocation" x="-57.971014492753625" y="114.50892857142857"/>
+        </scene>
+    </scenes>
+</document>
