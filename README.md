@@ -1,6 +1,6 @@
 ## 一、概述
 
-该Demo演示直播带货的一个场景应用，包含播放器、聊天室、打赏（自定义消息）、商品（商品库后台 http://live.polyv.net/goods-shelves.html）功能。
+该 Demo 演示直播带货的一个场景应用，包含播放器、聊天室、打赏（自定义消息）、商品功能。
 
 
 
@@ -8,10 +8,9 @@
 
 ### （2.1）Demo 体验步骤
 
-（1）打开终端，cd 至Demo路径下，pod install 安装依赖库。或 pod update
+（1）打开终端，cd 至 Demo 路径下，pod install 安装依赖库。或 pod update
 
 （2）可直接运行，在界面上填写相关参数信息，或在 AppDelegate.m 中配置保利威账户信息
-
 
 
 ### （2.2）Demo 文件构成
@@ -82,13 +81,13 @@ end
 
 （2）将 PolyvLiveEcommerceScene、PolyvLiveCommonModul 文件夹添加至自己项目中即可
 
-  (3)  初始化参看demo：ViewController.m
-
+ (3)  初始化参看 demo：ViewController.m
 
 
 ### （3.2）PolyvLiveScenesDemo 简介
 
-####（3.2.1）PLVECLiveViewController.m 直播观看页
+#### （3.2.1）PLVECLiveViewController.m 直播观看页
+
 
 ```
 // UI视图
@@ -162,7 +161,7 @@ end
 
 
 
-####（3.2.2）PLVECPlaybackViewController.m 直播回放观看页
+#### （3.2.2）PLVECPlaybackViewController.m 直播回放观看页
 
 
 
@@ -223,7 +222,7 @@ end
 
 
 
-demo 中接入和演示的是保利威后台商品管理系统的前端显示，如果外接商品系统，替换相关功能模块代码即可，UI 可参考 demo 或自行实现。
+demo 中接入和演示的是保利威后台商品管理系统（商品库后台 http://live.polyv.net/goods-shelves.html ）的前端显示，如果外接商品系统，替换相关功能模块代码即可，UI 可参考 demo 或自行实现。
 
 
 
