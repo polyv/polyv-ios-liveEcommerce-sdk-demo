@@ -9,11 +9,10 @@
 #import "PLVLiveSDKConfig.h"
 
 /*
- history:
-    0.1.0+200616
-    0.2.0+200630、0.2.1+200701、0.2.3+200703、0.2.4+200703
+ history(release):
+    0.2.4+200703、0.2.5+200707
  */
-#define LiveCommonModul_version @"0.2.5+200707"
+#define LiveCommonModul_version @"0.2.6+200708"
 
 @interface PLVLiveAccount ()
 

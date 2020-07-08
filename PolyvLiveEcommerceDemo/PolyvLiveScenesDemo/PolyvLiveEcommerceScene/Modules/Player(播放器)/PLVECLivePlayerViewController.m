@@ -52,6 +52,10 @@
     backgroundImg.image = [PLVECUtils imageForWatchResource:@"plv_background_img"];
     [self.view addSubview:backgroundImg];
     
+    self.displayView = [[UIView alloc] init];
+    self.displayView.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:self.displayView];
+    
     self.backgroundView = [[UIView alloc] init];
     self.backgroundView.backgroundColor = [UIColor blackColor];
     self.backgroundView.hidden = YES;
@@ -67,10 +71,6 @@
     self.noLiveLabel.textAlignment = NSTextAlignmentCenter;
     self.noLiveLabel.font = [UIFont systemFontOfSize:14.0];
     [self.backgroundView addSubview:self.noLiveLabel];
-    
-    self.displayView = [[UIView alloc] init];
-    self.displayView.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:self.displayView];
     
     [self layoutViewsFrame];
 }
@@ -239,22 +239,9 @@
 /// 定时器查询(每6秒)的直播流状态回调
 - (void)livePlayerController:(PLVLivePlayerController *)livePlayer streamState:(PLVLiveStreamState)streamState {
     self.roomData.liveState = streamState;
-    self.displayView.hidden = NO;
-    if (!self.warmUpPlaying) {
-        switch (streamState) {
-            case PLVLiveStreamStateNoStream: {
-                self.displayView.hidden = YES;
-                self.backgroundView.hidden = NO;
-            } break;
-            case PLVLiveStreamStateLive: {
-                self.backgroundView.hidden = YES;
-            } break;
-            case PLVLiveStreamStateStop: {
-                self.backgroundView.hidden = YES;
-            } break;
-            default:
-                break;
-        }
+    self.backgroundView.hidden = YES;
+    if (!self.warmUpPlaying && streamState == PLVLiveStreamStateNoStream) {
+        self.backgroundView.hidden = NO;
     }
 }
 

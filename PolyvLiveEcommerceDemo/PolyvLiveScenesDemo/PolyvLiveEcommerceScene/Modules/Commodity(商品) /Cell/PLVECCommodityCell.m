@@ -19,7 +19,7 @@
         self.coverImageView = [[UIImageView alloc] init];
         self.coverImageView.layer.cornerRadius = 10.0;
         self.coverImageView.layer.masksToBounds = YES;
-        self.coverImageView.contentMode = UIViewContentModeScaleAspectFit;
+        self.coverImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:self.coverImageView];
         
         self.nameLabel = [[UILabel alloc] init];
