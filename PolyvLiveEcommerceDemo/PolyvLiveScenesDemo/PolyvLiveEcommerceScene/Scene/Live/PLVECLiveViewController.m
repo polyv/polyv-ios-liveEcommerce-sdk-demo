@@ -192,7 +192,7 @@
     __weak typeof(self) weakSelf = self;
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [weakSelf extensionContext];
+        [weakSelf exitCurrentController];
     }]];
     [self presentViewController:alertController animated:YES completion:nil];
 }

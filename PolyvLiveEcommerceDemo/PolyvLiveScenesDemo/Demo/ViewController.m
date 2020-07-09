@@ -98,7 +98,7 @@ static NSString *kPLVUserDefaultLoginInfoKey = @"kPLVUserDefaultLoginInfoKey_dem
         }
         
         // 配置观看用户信息、频道及帐号信息
-        PLVLiveWatchUser *watchUser = [PLVLiveWatchUser watchUserWithUserId:@"101010" nickName:@"iOS user" avatarUrl:nil];
+        PLVLiveWatchUser *watchUser = [PLVLiveWatchUser watchUserWithUserId:nil nickName:@"iOS user" avatarUrl:nil];
         PLVLiveChannel *channel = [PLVLiveChannel channelWithChannelId:self.channelId watchUser:watchUser account:PLVLiveSDKConfig.sharedSDK.account];
         
         // 配置房间初始状态

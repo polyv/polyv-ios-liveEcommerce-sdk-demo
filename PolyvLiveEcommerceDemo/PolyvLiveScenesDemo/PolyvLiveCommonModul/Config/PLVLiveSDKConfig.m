@@ -10,9 +10,9 @@
 
 /*
  history(release):
-    0.2.4+200703、0.2.5+200707
+    0.2.4+200703、0.2.5+200707、0.2.6+200708
  */
-#define LiveCommonModul_version @"0.2.6+200708"
+#define LiveCommonModul_version @"0.2.7+200709"
 
 @interface PLVLiveAccount ()
 
