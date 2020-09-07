@@ -48,7 +48,7 @@
 
 @implementation PLVECChatCell
 
-+ (CGFloat)cellHeightWithModel:(PLVCellModel *)model {
++ (CGFloat)cellHeightWithModel:(PLVChatCellModel *)model {
     if (![model isKindOfClass:PLVECChatCellModel.class]) {
         return 0;
     }
@@ -99,10 +99,12 @@
     }
     
     if ([[(PLVECChatCellModel *)self.model chatModel] isKindOfClass:PLVChatImageModel.class]) {
+        self.userInteractionEnabled = NO;
         PLVChatImageModel *imageModel = (PLVChatImageModel *)[(PLVECChatCellModel *)self.model chatModel];
         UIImageView *imageView = [[UIImageView alloc] init];
         __weak typeof(self)weakSelf = self;
         [PLVFdUtil setImageWithURL:[NSURL URLWithString:imageModel.imageUrl] inImageView:imageView completed:^(UIImage *image, NSError *error, NSURL *imageURL) {
+            weakSelf.userInteractionEnabled = YES;
             if (error) {
                 NSLog(@"请求失败！%@",error.localizedDescription);
             } else {

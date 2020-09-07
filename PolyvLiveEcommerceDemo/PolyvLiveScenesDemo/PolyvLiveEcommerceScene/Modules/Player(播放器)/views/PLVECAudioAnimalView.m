@@ -17,9 +17,9 @@
 
 @implementation PLVECAudioAnimalView
 
-- (instancetype)init
+- (instancetype)initWithFrame:(CGRect)frame
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = NO;
         self.backgroundColor = UIColor.blackColor;

@@ -18,7 +18,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // 账户信息配置
-    [PLVLiveSDKConfig configAccountWithUserId:@"" appId:@"" appSecret:@""];
+    //[PLVLiveSDKConfig configAccountWithUserId:@"" appId:@"" appSecret:@""];
+    
+    // 开启 socket 调试模式
+    //PLVLiveSDKConfig.sharedSDK.socketDebug = YES;
     
     NSLog(@"SDK version: %@", PLVLiveSDKConfig.sdkVersion);
     

@@ -197,7 +197,7 @@ static NSString *kPLVUserDefaultLoginInfoKey = @"kPLVUserDefaultLoginInfoKey_dem
     [hud hideAnimated:YES afterDelay:3.0];
 }
 
-#pragma mark - Rewrite
+#pragma mark - Override
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];

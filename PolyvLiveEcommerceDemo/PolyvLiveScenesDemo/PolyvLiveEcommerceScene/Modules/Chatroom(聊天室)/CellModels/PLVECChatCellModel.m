@@ -12,21 +12,15 @@
 
 @interface PLVECChatCellModel ()
 
-@property (nonatomic, strong) PLVChatModel *chatModel;
-
 @property (nonatomic, copy) NSAttributedString *attrCont;
 
 @end
 
 @implementation PLVECChatCellModel
 
-+ (instancetype)cellModelWithChatModel:(PLVChatModel *)chatModel {
-    PLVECChatCellModel *cellModel = [[self alloc] init];
-    if (cellModel) {
-        cellModel.chatModel = chatModel;
-        [cellModel createRichTextMessage];
-    }
-    return cellModel;
+- (void)reloadModelWithChatModel:(PLVChatModel *)chatModel {
+    [super reloadModelWithChatModel:chatModel];
+    [self createRichTextMessage];
 }
 
 #pragma mark - Private
@@ -36,7 +30,7 @@
         return;
     }
     
-    PLVChatUser *user = self.chatModel.user;
+    PLVLiveChatUser *user = self.chatModel.user;
     
     NSString *nickStr = [NSString stringWithFormat:@"%@：",user.nickName];
     UIColor *nickColor = [UIColor colorWithRed:1 green:209/255.0 blue:107/255.0 alpha:1];
@@ -78,13 +72,13 @@
         actorLB.layer.cornerRadius = 6.0*scale;
         actorLB.layer.masksToBounds = YES;
         switch (user.userType) {
-            case PLVChatUserTypeGuest:
+            case PLVLiveUserTypeGuest:
                 actorLB.backgroundColor = guestActorBgColor; break;
-            case PLVChatUserTypeTeacher:
+            case PLVLiveUserTypeTeacher:
                 actorLB.backgroundColor = teacherActorBgColor; break;
-            case PLVChatUserTypeAssistant:
+            case PLVLiveUserTypeAssistant:
                 actorLB.backgroundColor = assistantActorBgColor; break;
-            case PLVChatUserTypeManager:
+            case PLVLiveUserTypeManager:
                 actorLB.backgroundColor = managerActorBgColor; break;
             default: break;
         }

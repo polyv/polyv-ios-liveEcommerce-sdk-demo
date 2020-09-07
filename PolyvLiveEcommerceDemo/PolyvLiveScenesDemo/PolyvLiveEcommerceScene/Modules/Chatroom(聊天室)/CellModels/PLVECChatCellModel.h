@@ -6,19 +6,15 @@
 //  Copyright © 2020 polyv. All rights reserved.
 //
 
-#import "PLVCellModel.h"
+#import "PLVChatCellModel.h"
 #import "PLVChatTextModel.h"
 #import "PLVChatImageModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PLVECChatCellModel : PLVCellModel
-
-@property (nonatomic, strong, readonly) PLVChatModel *chatModel;
+@interface PLVECChatCellModel : PLVChatCellModel
 
 @property (nonatomic, copy, readonly) NSAttributedString *attrCont;
-
-+ (instancetype)cellModelWithChatModel:(PLVChatModel *)chatModel;
 
 @end
 

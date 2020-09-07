@@ -24,21 +24,32 @@
 		6713072024A201F500A7EC5B /* PLVSceneLoginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6713071F24A201F500A7EC5B /* PLVSceneLoginManager.m */; };
 		6713072524A2295000A7EC5B /* PLVECPlaybackPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6713072424A2295000A7EC5B /* PLVECPlaybackPlayerViewController.m */; };
 		6713072C24A2422A00A7EC5B /* PLVECLivePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6713072B24A2422A00A7EC5B /* PLVECLivePlayerViewController.m */; };
+		672D74CA24BBF93F00366A34 /* PLVLiveUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 672D74C924BBF93F00366A34 /* PLVLiveUser.m */; };
+		672D74CD24BBFC8B00366A34 /* PLVLiveWatchUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 672D74CC24BBFC8B00366A34 /* PLVLiveWatchUser.m */; };
+		672D74D024BBFD0900366A34 /* PLVLiveChatUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 672D74CF24BBFD0900366A34 /* PLVLiveChatUser.m */; };
+		672D74D424BC6C1200366A34 /* PLVECChatroomPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 672D74D324BC6C1200366A34 /* PLVECChatroomPresenter.m */; };
 		6770A8E224ADB54C0072D7CA /* PLVECMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6770A8E124ADB54C0072D7CA /* PLVECMoreView.m */; };
 		6785813824B46C9300A972F6 /* PLVChatImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6785813724B46C9200A972F6 /* PLVChatImageModel.m */; };
 		6785813B24B46E5000A972F6 /* PLVChatTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6785813A24B46E5000A972F6 /* PLVChatTextModel.m */; };
 		6785813E24B4703300A972F6 /* PLVChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6785813D24B4703300A972F6 /* PLVChatModel.m */; };
 		6785814324B4813F00A972F6 /* PLVPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6785814024B4813F00A972F6 /* PLVPhotoBrowser.m */; };
 		6785814424B4813F00A972F6 /* PLVPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6785814124B4813F00A972F6 /* PLVPhotoBrowser.bundle */; };
-		6786785E247D015C0019596B /* PLVECChatroomController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6786785D247D015C0019596B /* PLVECChatroomController.m */; };
-		67B2AEBD2498CD5E00A6964B /* PLVCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B2AEBC2498CD5E00A6964B /* PLVCellModel.m */; };
-		67B2AEC02498CD8800A6964B /* PLVBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B2AEBF2498CD8800A6964B /* PLVBaseCell.m */; };
+		67B2AEBD2498CD5E00A6964B /* PLVChatCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B2AEBC2498CD5E00A6964B /* PLVChatCellModel.m */; };
+		67B2AEC02498CD8800A6964B /* PLVChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B2AEBF2498CD8800A6964B /* PLVChatCell.m */; };
 		67B2AEC4249919D700A6964B /* PLVECWelcomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B2AEC3249919D700A6964B /* PLVECWelcomView.m */; };
+		67B6A34A24B70D0000931A1D /* PLVLivePlayerPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B6A34924B70D0000931A1D /* PLVLivePlayerPresenter.m */; };
+		67B6A34D24B70D1100931A1D /* PLVPlaybackPlayerPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B6A34C24B70D1100931A1D /* PLVPlaybackPlayerPresenter.m */; };
+		67B6A35124B7153200931A1D /* PLVLivePlayerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B6A35024B7153200931A1D /* PLVLivePlayerViewModel.m */; };
 		67B941C02493326D0051AEC9 /* PLVLiveUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B941BF2493326D0051AEC9 /* PLVLiveUtil.m */; };
 		67B941CB249332BB0051AEC9 /* PLVLiveSDKConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B941CA249332BB0051AEC9 /* PLVLiveSDKConfig.m */; };
 		67B941DA249333A60051AEC9 /* PLVChatroomPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B941D9249333A60051AEC9 /* PLVChatroomPresenter.m */; };
 		67B941DF249334FB0051AEC9 /* PLVChatroomViewMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B941DE249334FB0051AEC9 /* PLVChatroomViewMode.m */; };
 		67B9EB7B24AB5C86000D0556 /* PLVECGiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67B9EB7A24AB5C86000D0556 /* PLVECGiftView.m */; };
+		67BB1D7724EE693000F9377C /* PLVECCommodityCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67BB1D7624EE693000F9377C /* PLVECCommodityCellModel.m */; };
+		67BB1D7A24EE7E4200F9377C /* PLVECCommodityPushView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67BB1D7924EE7E4200F9377C /* PLVECCommodityPushView.m */; };
+		67BC9D7D24B80C7B008494A0 /* PLVPlaybackPlayerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67BC9D7C24B80C7B008494A0 /* PLVPlaybackPlayerViewModel.m */; };
+		67BC9D8024B80CA8008494A0 /* PLVBasePlayerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67BC9D7F24B80CA8008494A0 /* PLVBasePlayerViewModel.m */; };
+		67BC9D8324B8124F008494A0 /* PLVBasePlayerPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67BC9D8224B8124F008494A0 /* PLVBasePlayerPresenter.m */; };
 		67BFAB88249790F800A1CE40 /* PLVSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 67BFAB87249790F800A1CE40 /* PLVSocketManager.m */; };
 		67C05A2324A8423900E5D5BD /* PLVECBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C05A2224A8423900E5D5BD /* PLVECBottomView.m */; };
 		67C05A2624A8487600E5D5BD /* PLVECCommodityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67C05A2524A8487600E5D5BD /* PLVECCommodityView.m */; };
@@ -57,7 +68,7 @@
 		67D700C52476807200429B55 /* WatchResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 67D700C42476807200429B55 /* WatchResource.bundle */; };
 		67D700C92476817500429B55 /* PLVECUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D700C82476817500429B55 /* PLVECUtils.m */; };
 		67D7E11024A9BDB600838C53 /* PLVECRewardController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D7E10F24A9BDB600838C53 /* PLVECRewardController.m */; };
-		67D7E11324A9C57C00838C53 /* PLVECCommodityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D7E11224A9C57C00838C53 /* PLVECCommodityController.m */; };
+		67D7E11324A9C57C00838C53 /* PLVECCommodityPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D7E11224A9C57C00838C53 /* PLVECCommodityPresenter.m */; };
 		67D7E11624A9C5C000838C53 /* PLVECCommodityViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D7E11524A9C5C000838C53 /* PLVECCommodityViewModel.m */; };
 		67D7E11924A9C67500838C53 /* PLVECCommodityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D7E11824A9C67500838C53 /* PLVECCommodityModel.m */; };
 		67D7E11C24A9DC8F00838C53 /* PLVECCommodityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D7E11B24A9DC8F00838C53 /* PLVECCommodityCell.m */; };
@@ -101,6 +112,14 @@
 		6713072424A2295000A7EC5B /* PLVECPlaybackPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLVECPlaybackPlayerViewController.m; sourceTree = "<group>"; };
 		6713072A24A2422A00A7EC5B /* PLVECLivePlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECLivePlayerViewController.h; sourceTree = "<group>"; };
 		6713072B24A2422A00A7EC5B /* PLVECLivePlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECLivePlayerViewController.m; sourceTree = "<group>"; };
+		672D74C824BBF93F00366A34 /* PLVLiveUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVLiveUser.h; sourceTree = "<group>"; };
+		672D74C924BBF93F00366A34 /* PLVLiveUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVLiveUser.m; sourceTree = "<group>"; };
+		672D74CB24BBFC8B00366A34 /* PLVLiveWatchUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVLiveWatchUser.h; sourceTree = "<group>"; };
+		672D74CC24BBFC8B00366A34 /* PLVLiveWatchUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVLiveWatchUser.m; sourceTree = "<group>"; };
+		672D74CE24BBFD0900366A34 /* PLVLiveChatUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVLiveChatUser.h; sourceTree = "<group>"; };
+		672D74CF24BBFD0900366A34 /* PLVLiveChatUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVLiveChatUser.m; sourceTree = "<group>"; };
+		672D74D224BC6C1200366A34 /* PLVECChatroomPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECChatroomPresenter.h; sourceTree = "<group>"; };
+		672D74D324BC6C1200366A34 /* PLVECChatroomPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECChatroomPresenter.m; sourceTree = "<group>"; };
 		6770A8E024ADB54C0072D7CA /* PLVECMoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECMoreView.h; sourceTree = "<group>"; };
 		6770A8E124ADB54C0072D7CA /* PLVECMoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECMoreView.m; sourceTree = "<group>"; };
 		6785813624B46C9200A972F6 /* PLVChatImageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVChatImageModel.h; sourceTree = "<group>"; };
@@ -112,14 +131,18 @@
 		6785814024B4813F00A972F6 /* PLVPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLVPhotoBrowser.m; sourceTree = "<group>"; };
 		6785814124B4813F00A972F6 /* PLVPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PLVPhotoBrowser.bundle; sourceTree = "<group>"; };
 		6785814524B4814B00A972F6 /* PLVPhotoBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVPhotoBrowser.h; sourceTree = "<group>"; };
-		6786785C247D015C0019596B /* PLVECChatroomController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECChatroomController.h; sourceTree = "<group>"; };
-		6786785D247D015C0019596B /* PLVECChatroomController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECChatroomController.m; sourceTree = "<group>"; };
-		67B2AEBB2498CD5E00A6964B /* PLVCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVCellModel.h; sourceTree = "<group>"; };
-		67B2AEBC2498CD5E00A6964B /* PLVCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVCellModel.m; sourceTree = "<group>"; };
-		67B2AEBE2498CD8800A6964B /* PLVBaseCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVBaseCell.h; sourceTree = "<group>"; };
-		67B2AEBF2498CD8800A6964B /* PLVBaseCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVBaseCell.m; sourceTree = "<group>"; };
+		67B2AEBB2498CD5E00A6964B /* PLVChatCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVChatCellModel.h; sourceTree = "<group>"; };
+		67B2AEBC2498CD5E00A6964B /* PLVChatCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVChatCellModel.m; sourceTree = "<group>"; };
+		67B2AEBE2498CD8800A6964B /* PLVChatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVChatCell.h; sourceTree = "<group>"; };
+		67B2AEBF2498CD8800A6964B /* PLVChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVChatCell.m; sourceTree = "<group>"; };
 		67B2AEC2249919D700A6964B /* PLVECWelcomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECWelcomView.h; sourceTree = "<group>"; };
 		67B2AEC3249919D700A6964B /* PLVECWelcomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECWelcomView.m; sourceTree = "<group>"; };
+		67B6A34824B70D0000931A1D /* PLVLivePlayerPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVLivePlayerPresenter.h; sourceTree = "<group>"; };
+		67B6A34924B70D0000931A1D /* PLVLivePlayerPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVLivePlayerPresenter.m; sourceTree = "<group>"; };
+		67B6A34B24B70D1100931A1D /* PLVPlaybackPlayerPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVPlaybackPlayerPresenter.h; sourceTree = "<group>"; };
+		67B6A34C24B70D1100931A1D /* PLVPlaybackPlayerPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVPlaybackPlayerPresenter.m; sourceTree = "<group>"; };
+		67B6A34F24B7153200931A1D /* PLVLivePlayerViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVLivePlayerViewModel.h; sourceTree = "<group>"; };
+		67B6A35024B7153200931A1D /* PLVLivePlayerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVLivePlayerViewModel.m; sourceTree = "<group>"; };
 		67B941BE2493326D0051AEC9 /* PLVLiveUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVLiveUtil.h; sourceTree = "<group>"; };
 		67B941BF2493326D0051AEC9 /* PLVLiveUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVLiveUtil.m; sourceTree = "<group>"; };
 		67B941C9249332BB0051AEC9 /* PLVLiveSDKConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVLiveSDKConfig.h; sourceTree = "<group>"; };
@@ -130,6 +153,17 @@
 		67B941DE249334FB0051AEC9 /* PLVChatroomViewMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVChatroomViewMode.m; sourceTree = "<group>"; };
 		67B9EB7924AB5C86000D0556 /* PLVECGiftView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECGiftView.h; sourceTree = "<group>"; };
 		67B9EB7A24AB5C86000D0556 /* PLVECGiftView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECGiftView.m; sourceTree = "<group>"; };
+		67BB1D7524EE693000F9377C /* PLVECCommodityCellModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECCommodityCellModel.h; sourceTree = "<group>"; };
+		67BB1D7624EE693000F9377C /* PLVECCommodityCellModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECCommodityCellModel.m; sourceTree = "<group>"; };
+		67BB1D7824EE7E4200F9377C /* PLVECCommodityPushView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECCommodityPushView.h; sourceTree = "<group>"; };
+		67BB1D7924EE7E4200F9377C /* PLVECCommodityPushView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECCommodityPushView.m; sourceTree = "<group>"; };
+		67BC9D7B24B80C7B008494A0 /* PLVPlaybackPlayerViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVPlaybackPlayerViewModel.h; sourceTree = "<group>"; };
+		67BC9D7C24B80C7B008494A0 /* PLVPlaybackPlayerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVPlaybackPlayerViewModel.m; sourceTree = "<group>"; };
+		67BC9D7E24B80CA8008494A0 /* PLVBasePlayerViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVBasePlayerViewModel.h; sourceTree = "<group>"; };
+		67BC9D7F24B80CA8008494A0 /* PLVBasePlayerViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVBasePlayerViewModel.m; sourceTree = "<group>"; };
+		67BC9D8124B8124F008494A0 /* PLVBasePlayerPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVBasePlayerPresenter.h; sourceTree = "<group>"; };
+		67BC9D8224B8124F008494A0 /* PLVBasePlayerPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVBasePlayerPresenter.m; sourceTree = "<group>"; };
+		67BC9D8624B85912008494A0 /* PLVSocketServiceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVSocketServiceProtocol.h; sourceTree = "<group>"; };
 		67BFAB86249790F800A1CE40 /* PLVSocketManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVSocketManager.h; sourceTree = "<group>"; };
 		67BFAB87249790F800A1CE40 /* PLVSocketManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVSocketManager.m; sourceTree = "<group>"; };
 		67C05A2124A8423900E5D5BD /* PLVECBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECBottomView.h; sourceTree = "<group>"; };
@@ -165,8 +199,8 @@
 		67D700C82476817500429B55 /* PLVECUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECUtils.m; sourceTree = "<group>"; };
 		67D7E10E24A9BDB600838C53 /* PLVECRewardController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECRewardController.h; sourceTree = "<group>"; };
 		67D7E10F24A9BDB600838C53 /* PLVECRewardController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECRewardController.m; sourceTree = "<group>"; };
-		67D7E11124A9C57C00838C53 /* PLVECCommodityController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECCommodityController.h; sourceTree = "<group>"; };
-		67D7E11224A9C57C00838C53 /* PLVECCommodityController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECCommodityController.m; sourceTree = "<group>"; };
+		67D7E11124A9C57C00838C53 /* PLVECCommodityPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECCommodityPresenter.h; sourceTree = "<group>"; };
+		67D7E11224A9C57C00838C53 /* PLVECCommodityPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECCommodityPresenter.m; sourceTree = "<group>"; };
 		67D7E11424A9C5C000838C53 /* PLVECCommodityViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECCommodityViewModel.h; sourceTree = "<group>"; };
 		67D7E11524A9C5C000838C53 /* PLVECCommodityViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLVECCommodityViewModel.m; sourceTree = "<group>"; };
 		67D7E11724A9C67500838C53 /* PLVECCommodityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLVECCommodityModel.h; sourceTree = "<group>"; };
@@ -217,7 +251,8 @@
 		63264EDA245A619900C7199C /* PolyvLiveEcommerceScene */ = {
 			isa = PBXGroup;
 			children = (
-				67B138AB24A0D06E001146FD /* Scene */,
+				67EF64E8249F6DCA00D4D5F0 /* Views */,
+				67B6A34524B7046100931A1D /* Controllers */,
 				67B941DB249333D70051AEC9 /* Modules */,
 				67B941DC249334160051AEC9 /* Resource */,
 			);
@@ -259,7 +294,7 @@
 				633923A82459877B00C0ACE9 /* AppDelegate.m */,
 				67B941BA24932AE20051AEC9 /* Demo */,
 				63264EDA245A619900C7199C /* PolyvLiveEcommerceScene */,
-				67B941BB24932B220051AEC9 /* PolyvLiveCommonModul */,
+				67B941BB24932B220051AEC9 /* PolyvLiveCommonModule */,
 				67B941B924932A730051AEC9 /* Supporting Files */,
 			);
 			path = PolyvLiveScenesDemo;
@@ -272,6 +307,15 @@
 				67113EEB249E515800AE48FB /* PLVLiveRoomPresenter.m */,
 			);
 			path = LiveRoom;
+			sourceTree = "<group>";
+		};
+		672D74D124BC6BF100366A34 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				672D74D224BC6C1200366A34 /* PLVECChatroomPresenter.h */,
+				672D74D324BC6C1200366A34 /* PLVECChatroomPresenter.m */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		6770A8DE24ADB0740072D7CA /* SwitchView */ = {
@@ -303,9 +347,24 @@
 			path = CommonBaseView;
 			sourceTree = "<group>";
 		};
+		677A061224BDF198007D334E /* PageViews */ = {
+			isa = PBXGroup;
+			children = (
+				67D700A22476345B00429B55 /* PLVECLiveHomePageView.h */,
+				67D700A32476345B00429B55 /* PLVECLiveHomePageView.m */,
+				67D700A52476346A00429B55 /* PLVECLiveDetailPageView.h */,
+				67D700A62476346A00429B55 /* PLVECLiveDetailPageView.m */,
+				67D700A82476347500429B55 /* PLVECPalybackHomePageView.h */,
+				67D700A92476347500429B55 /* PLVECPalybackHomePageView.m */,
+			);
+			path = PageViews;
+			sourceTree = "<group>";
+		};
 		6785813524B46C0E00A972F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				672D74CE24BBFD0900366A34 /* PLVLiveChatUser.h */,
+				672D74CF24BBFD0900366A34 /* PLVLiveChatUser.m */,
 				6785813C24B4703300A972F6 /* PLVChatModel.h */,
 				6785813D24B4703300A972F6 /* PLVChatModel.m */,
 				6785813924B46E5000A972F6 /* PLVChatTextModel.h */,
@@ -326,16 +385,6 @@
 			path = PLVPhotoBrowser;
 			sourceTree = "<group>";
 		};
-		67B138AB24A0D06E001146FD /* Scene */ = {
-			isa = PBXGroup;
-			children = (
-				67EF64E8249F6DCA00D4D5F0 /* Views */,
-				67EF64E6249F6DAA00D4D5F0 /* Live */,
-				67EF64E7249F6DB000D4D5F0 /* Playback */,
-			);
-			path = Scene;
-			sourceTree = "<group>";
-		};
 		67B2AEB724985DB600A6964B /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,24 +402,121 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		67B2AEB924985E2200A6964B /* Interactor */ = {
+		67B2AEB924985E2200A6964B /* DataInteractor */ = {
 			isa = PBXGroup;
 			children = (
+				67BC9D8624B85912008494A0 /* PLVSocketServiceProtocol.h */,
 				67BFAB86249790F800A1CE40 /* PLVSocketManager.h */,
 				67BFAB87249790F800A1CE40 /* PLVSocketManager.m */,
 				6713071E24A201F500A7EC5B /* PLVSceneLoginManager.h */,
 				6713071F24A201F500A7EC5B /* PLVSceneLoginManager.m */,
 			);
-			path = Interactor;
+			path = DataInteractor;
 			sourceTree = "<group>";
 		};
-		67B2AEBA2498CD3100A6964B /* CellModel */ = {
+		67B2AEBA2498CD3100A6964B /* BaseCellModel */ = {
 			isa = PBXGroup;
 			children = (
-				67B2AEBB2498CD5E00A6964B /* PLVCellModel.h */,
-				67B2AEBC2498CD5E00A6964B /* PLVCellModel.m */,
+				67B2AEBB2498CD5E00A6964B /* PLVChatCellModel.h */,
+				67B2AEBC2498CD5E00A6964B /* PLVChatCellModel.m */,
 			);
-			path = CellModel;
+			path = BaseCellModel;
+			sourceTree = "<group>";
+		};
+		67B6A34024B6B1C500931A1D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				67D7E11424A9C5C000838C53 /* PLVECCommodityViewModel.h */,
+				67D7E11524A9C5C000838C53 /* PLVECCommodityViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		67B6A34124B6B1D200931A1D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				67BB1D7824EE7E4200F9377C /* PLVECCommodityPushView.h */,
+				67BB1D7924EE7E4200F9377C /* PLVECCommodityPushView.m */,
+				67C05A2424A8487600E5D5BD /* PLVECCommodityView.h */,
+				67C05A2524A8487600E5D5BD /* PLVECCommodityView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		67B6A34324B6B3B500931A1D /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				67D7E11124A9C57C00838C53 /* PLVECCommodityPresenter.h */,
+				67D7E11224A9C57C00838C53 /* PLVECCommodityPresenter.m */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		67B6A34424B6CC2A00931A1D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				67D7E10E24A9BDB600838C53 /* PLVECRewardController.h */,
+				67D7E10F24A9BDB600838C53 /* PLVECRewardController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		67B6A34524B7046100931A1D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				677A061224BDF198007D334E /* PageViews */,
+				63264EDB245A61E600C7199C /* PLVECLiveViewController.h */,
+				63264EDC245A61E600C7199C /* PLVECLiveViewController.m */,
+				63264EE2245AA1EC00C7199C /* PLVECPlaybackViewController.h */,
+				63264EE3245AA1EC00C7199C /* PLVECPlaybackViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		67B6A34624B70CB400931A1D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6713072A24A2422A00A7EC5B /* PLVECLivePlayerViewController.h */,
+				6713072B24A2422A00A7EC5B /* PLVECLivePlayerViewController.m */,
+				6713072124A2263300A7EC5B /* PLVECPlaybackPlayerViewController.h */,
+				6713072424A2295000A7EC5B /* PLVECPlaybackPlayerViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		67B6A34724B70CCB00931A1D /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				67B6A34E24B7151B00931A1D /* ViewModel */,
+				67B6A35224B7301700931A1D /* Presenters */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		67B6A34E24B7151B00931A1D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				67BC9D7E24B80CA8008494A0 /* PLVBasePlayerViewModel.h */,
+				67BC9D7F24B80CA8008494A0 /* PLVBasePlayerViewModel.m */,
+				67B6A34F24B7153200931A1D /* PLVLivePlayerViewModel.h */,
+				67B6A35024B7153200931A1D /* PLVLivePlayerViewModel.m */,
+				67BC9D7B24B80C7B008494A0 /* PLVPlaybackPlayerViewModel.h */,
+				67BC9D7C24B80C7B008494A0 /* PLVPlaybackPlayerViewModel.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		67B6A35224B7301700931A1D /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				67BC9D8124B8124F008494A0 /* PLVBasePlayerPresenter.h */,
+				67BC9D8224B8124F008494A0 /* PLVBasePlayerPresenter.m */,
+				67B6A34824B70D0000931A1D /* PLVLivePlayerPresenter.h */,
+				67B6A34924B70D0000931A1D /* PLVLivePlayerPresenter.m */,
+				67B6A34B24B70D1100931A1D /* PLVPlaybackPlayerPresenter.h */,
+				67B6A34C24B70D1100931A1D /* PLVPlaybackPlayerPresenter.m */,
+			);
+			path = Presenters;
 			sourceTree = "<group>";
 		};
 		67B941B924932A730051AEC9 /* Supporting Files */ = {
@@ -395,16 +541,16 @@
 			path = Demo;
 			sourceTree = "<group>";
 		};
-		67B941BB24932B220051AEC9 /* PolyvLiveCommonModul */ = {
+		67B941BB24932B220051AEC9 /* PolyvLiveCommonModule */ = {
 			isa = PBXGroup;
 			children = (
-				67B941CF249332D90051AEC9 /* Business */,
-				67B2AEB924985E2200A6964B /* Interactor */,
+				67B941CF249332D90051AEC9 /* Modules */,
+				67B2AEB924985E2200A6964B /* DataInteractor */,
 				67C9680A24A57B8F00D8E2F6 /* DataService */,
 				67B941C8249332A80051AEC9 /* Config */,
 				67B2AEB724985DB600A6964B /* Common */,
 			);
-			path = PolyvLiveCommonModul;
+			path = PolyvLiveCommonModule;
 			sourceTree = "<group>";
 		};
 		67B941BC2493322B0051AEC9 /* Utils */ = {
@@ -434,25 +580,24 @@
 			path = Config;
 			sourceTree = "<group>";
 		};
-		67B941CF249332D90051AEC9 /* Business */ = {
+		67B941CF249332D90051AEC9 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
 				67113EE8249E510000AE48FB /* LiveRoom */,
+				67B6A34724B70CCB00931A1D /* Player */,
 				67B941D7249333850051AEC9 /* Chatroom */,
 			);
-			path = Business;
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		67B941D7249333850051AEC9 /* Chatroom */ = {
 			isa = PBXGroup;
 			children = (
 				6785813524B46C0E00A972F6 /* Models */,
-				67B941E0249335150051AEC9 /* Cell */,
-				67B2AEBA2498CD3100A6964B /* CellModel */,
-				67B941DD249334FB0051AEC9 /* PLVChatroomViewMode.h */,
-				67B941DE249334FB0051AEC9 /* PLVChatroomViewMode.m */,
-				67B941D8249333A60051AEC9 /* PLVChatroomPresenter.h */,
-				67B941D9249333A60051AEC9 /* PLVChatroomPresenter.m */,
+				67B941E0249335150051AEC9 /* BaseCell */,
+				67B2AEBA2498CD3100A6964B /* BaseCellModel */,
+				67C7E33224BD93B40033794C /* ViewModel */,
+				67C7E33324BD93C30033794C /* Presenter */,
 			);
 			path = Chatroom;
 			sourceTree = "<group>";
@@ -462,8 +607,8 @@
 			children = (
 				67B941E4249352EF0051AEC9 /* Player(播放器) */,
 				67D7009F2476341800429B55 /* Chatroom(聊天室) */,
-				67B941E3249352E30051AEC9 /* Reward(打赏) */,
 				67B941E2249352C80051AEC9 /* Commodity(商品)  */,
+				67B941E3249352E30051AEC9 /* Reward(打赏) */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -478,22 +623,24 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
-		67B941E0249335150051AEC9 /* Cell */ = {
+		67B941E0249335150051AEC9 /* BaseCell */ = {
 			isa = PBXGroup;
 			children = (
-				67B2AEBE2498CD8800A6964B /* PLVBaseCell.h */,
-				67B2AEBF2498CD8800A6964B /* PLVBaseCell.m */,
+				67B2AEBE2498CD8800A6964B /* PLVChatCell.h */,
+				67B2AEBF2498CD8800A6964B /* PLVChatCell.m */,
 			);
-			path = Cell;
+			path = BaseCell;
 			sourceTree = "<group>";
 		};
 		67B941E2249352C80051AEC9 /* Commodity(商品)  */ = {
 			isa = PBXGroup;
 			children = (
-				67D7E11E24A9DCAA00838C53 /* Cell */,
 				67D7E11D24A9DC9500838C53 /* Model */,
-				67D7E11124A9C57C00838C53 /* PLVECCommodityController.h */,
-				67D7E11224A9C57C00838C53 /* PLVECCommodityController.m */,
+				67BB1D7424EE689200F9377C /* CellModel */,
+				67D7E11E24A9DCAA00838C53 /* Cell */,
+				67B6A34024B6B1C500931A1D /* ViewModel */,
+				67B6A34124B6B1D200931A1D /* View */,
+				67B6A34324B6B3B500931A1D /* Presenter */,
 			);
 			path = "Commodity(商品) ";
 			sourceTree = "<group>";
@@ -501,8 +648,8 @@
 		67B941E3249352E30051AEC9 /* Reward(打赏) */ = {
 			isa = PBXGroup;
 			children = (
-				67D7E10E24A9BDB600838C53 /* PLVECRewardController.h */,
-				67D7E10F24A9BDB600838C53 /* PLVECRewardController.m */,
+				67B9EB7C24AB5C92000D0556 /* View */,
+				67B6A34424B6CC2A00931A1D /* Controller */,
 			);
 			path = "Reward(打赏)";
 			sourceTree = "<group>";
@@ -511,10 +658,7 @@
 			isa = PBXGroup;
 			children = (
 				67B941EA249358E80051AEC9 /* views */,
-				6713072A24A2422A00A7EC5B /* PLVECLivePlayerViewController.h */,
-				6713072B24A2422A00A7EC5B /* PLVECLivePlayerViewController.m */,
-				6713072124A2263300A7EC5B /* PLVECPlaybackPlayerViewController.h */,
-				6713072424A2295000A7EC5B /* PLVECPlaybackPlayerViewController.m */,
+				67B6A34624B70CB400931A1D /* ViewControllers */,
 			);
 			path = "Player(播放器)";
 			sourceTree = "<group>";
@@ -528,7 +672,7 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		67B9EB7C24AB5C92000D0556 /* RewardView */ = {
+		67B9EB7C24AB5C92000D0556 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				67B9EB7924AB5C86000D0556 /* PLVECGiftView.h */,
@@ -536,27 +680,16 @@
 				67C05A2724A848D200E5D5BD /* PLVECRewardView.h */,
 				67C05A2824A848D200E5D5BD /* PLVECRewardView.m */,
 			);
-			path = RewardView;
+			path = View;
 			sourceTree = "<group>";
 		};
-		67BBCE7124AC71CD0097CAD3 /* ChatroomView */ = {
+		67BB1D7424EE689200F9377C /* CellModel */ = {
 			isa = PBXGroup;
 			children = (
-				67B2AEC2249919D700A6964B /* PLVECWelcomView.h */,
-				67B2AEC3249919D700A6964B /* PLVECWelcomView.m */,
-				67D700B82476535000429B55 /* PLVECChatroomView.h */,
-				67D700B92476535000429B55 /* PLVECChatroomView.m */,
+				67BB1D7524EE693000F9377C /* PLVECCommodityCellModel.h */,
+				67BB1D7624EE693000F9377C /* PLVECCommodityCellModel.m */,
 			);
-			path = ChatroomView;
-			sourceTree = "<group>";
-		};
-		67BBCE7224AC71E50097CAD3 /* CommodityView */ = {
-			isa = PBXGroup;
-			children = (
-				67C05A2424A8487600E5D5BD /* PLVECCommodityView.h */,
-				67C05A2524A8487600E5D5BD /* PLVECCommodityView.m */,
-			);
-			path = CommodityView;
+			path = CellModel;
 			sourceTree = "<group>";
 		};
 		67BBCE7324AC71FD0097CAD3 /* BulletinView */ = {
@@ -579,9 +712,42 @@
 			path = LiveRoomInfoView;
 			sourceTree = "<group>";
 		};
+		67BC9D8424B856B4008494A0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				67B2AEC2249919D700A6964B /* PLVECWelcomView.h */,
+				67B2AEC3249919D700A6964B /* PLVECWelcomView.m */,
+				67D700B82476535000429B55 /* PLVECChatroomView.h */,
+				67D700B92476535000429B55 /* PLVECChatroomView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		67C7E33224BD93B40033794C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				67B941DD249334FB0051AEC9 /* PLVChatroomViewMode.h */,
+				67B941DE249334FB0051AEC9 /* PLVChatroomViewMode.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		67C7E33324BD93C30033794C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				67B941D8249333A60051AEC9 /* PLVChatroomPresenter.h */,
+				67B941D9249333A60051AEC9 /* PLVChatroomPresenter.m */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		67C9680A24A57B8F00D8E2F6 /* DataService */ = {
 			isa = PBXGroup;
 			children = (
+				672D74C824BBF93F00366A34 /* PLVLiveUser.h */,
+				672D74C924BBF93F00366A34 /* PLVLiveUser.m */,
+				672D74CB24BBFC8B00366A34 /* PLVLiveWatchUser.h */,
+				672D74CC24BBFC8B00366A34 /* PLVLiveWatchUser.m */,
 				67C9680B24A57CDF00D8E2F6 /* PLVLiveChannel.h */,
 				67C9680C24A57CDF00D8E2F6 /* PLVLiveChannel.m */,
 				67C9680E24A57CFE00D8E2F6 /* PLVLiveRoomData.h */,
@@ -593,10 +759,10 @@
 		67D7009F2476341800429B55 /* Chatroom(聊天室) */ = {
 			isa = PBXGroup;
 			children = (
-				67D700BC2476536400429B55 /* Cells */,
 				67D700BB2476535800429B55 /* CellModels */,
-				6786785C247D015C0019596B /* PLVECChatroomController.h */,
-				6786785D247D015C0019596B /* PLVECChatroomController.m */,
+				67D700BC2476536400429B55 /* Cells */,
+				67BC9D8424B856B4008494A0 /* Views */,
+				672D74D124BC6BF100366A34 /* Presenter */,
 			);
 			path = "Chatroom(聊天室)";
 			sourceTree = "<group>";
@@ -624,8 +790,6 @@
 			children = (
 				67D7E11724A9C67500838C53 /* PLVECCommodityModel.h */,
 				67D7E11824A9C67500838C53 /* PLVECCommodityModel.m */,
-				67D7E11424A9C5C000838C53 /* PLVECCommodityViewModel.h */,
-				67D7E11524A9C5C000838C53 /* PLVECCommodityViewModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -658,43 +822,16 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
-		67EF64E6249F6DAA00D4D5F0 /* Live */ = {
-			isa = PBXGroup;
-			children = (
-				63264EDB245A61E600C7199C /* PLVECLiveViewController.h */,
-				63264EDC245A61E600C7199C /* PLVECLiveViewController.m */,
-			);
-			path = Live;
-			sourceTree = "<group>";
-		};
-		67EF64E7249F6DB000D4D5F0 /* Playback */ = {
-			isa = PBXGroup;
-			children = (
-				63264EE2245AA1EC00C7199C /* PLVECPlaybackViewController.h */,
-				63264EE3245AA1EC00C7199C /* PLVECPlaybackViewController.m */,
-			);
-			path = Playback;
-			sourceTree = "<group>";
-		};
 		67EF64E8249F6DCA00D4D5F0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				6770A8E324ADD0390072D7CA /* CommonBaseView */,
 				67BBCE7424AC72E90097CAD3 /* LiveRoomInfoView */,
 				67BBCE7324AC71FD0097CAD3 /* BulletinView */,
-				67BBCE7124AC71CD0097CAD3 /* ChatroomView */,
-				67BBCE7224AC71E50097CAD3 /* CommodityView */,
-				67B9EB7C24AB5C92000D0556 /* RewardView */,
 				67EF64EA249F6EDA00D4D5F0 /* LiveIntroductionView */,
 				6770A8DE24ADB0740072D7CA /* SwitchView */,
 				6770A8DF24ADB43F0072D7CA /* MoreView */,
 				67FC688A249F70D80001A472 /* PlayerContolView */,
-				67D700A22476345B00429B55 /* PLVECLiveHomePageView.h */,
-				67D700A32476345B00429B55 /* PLVECLiveHomePageView.m */,
-				67D700A52476346A00429B55 /* PLVECLiveDetailPageView.h */,
-				67D700A62476346A00429B55 /* PLVECLiveDetailPageView.m */,
-				67D700A82476347500429B55 /* PLVECPalybackHomePageView.h */,
-				67D700A92476347500429B55 /* PLVECPalybackHomePageView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -846,15 +983,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				67D7E11924A9C67500838C53 /* PLVECCommodityModel.m in Sources */,
+				67BB1D7A24EE7E4200F9377C /* PLVECCommodityPushView.m in Sources */,
 				67B941CB249332BB0051AEC9 /* PLVLiveSDKConfig.m in Sources */,
 				633923AF2459877B00C0ACE9 /* ViewController.m in Sources */,
 				67D7E11C24A9DC8F00838C53 /* PLVECCommodityCell.m in Sources */,
+				67B6A35124B7153200931A1D /* PLVLivePlayerViewModel.m in Sources */,
 				67BFAB88249790F800A1CE40 /* PLVSocketManager.m in Sources */,
 				67D700AA2476347500429B55 /* PLVECPalybackHomePageView.m in Sources */,
 				67E5930C247E5FEE002BD8E0 /* PLVECChatCell.m in Sources */,
 				67C9680D24A57CDF00D8E2F6 /* PLVLiveChannel.m in Sources */,
 				67C05A2924A848D200E5D5BD /* PLVECRewardView.m in Sources */,
 				67B9EB7B24AB5C86000D0556 /* PLVECGiftView.m in Sources */,
+				672D74CA24BBF93F00366A34 /* PLVLiveUser.m in Sources */,
 				67113EEC249E515800AE48FB /* PLVLiveRoomPresenter.m in Sources */,
 				67D700C92476817500429B55 /* PLVECUtils.m in Sources */,
 				67E59312247E6095002BD8E0 /* PLVECChatCellModel.m in Sources */,
@@ -863,25 +1003,31 @@
 				67D700AE2476351900429B55 /* PLVECLiveRoomInfoView.m in Sources */,
 				67D7E11624A9C5C000838C53 /* PLVECCommodityViewModel.m in Sources */,
 				6713072524A2295000A7EC5B /* PLVECPlaybackPlayerViewController.m in Sources */,
+				67BC9D8324B8124F008494A0 /* PLVBasePlayerPresenter.m in Sources */,
 				67D7E11024A9BDB600838C53 /* PLVECRewardController.m in Sources */,
 				63264EE1245A630500C7199C /* PLVECBaseNavigationController.m in Sources */,
-				67D7E11324A9C57C00838C53 /* PLVECCommodityController.m in Sources */,
+				67D7E11324A9C57C00838C53 /* PLVECCommodityPresenter.m in Sources */,
 				670F3555247B5DF2004F2291 /* PLVECBulletinCardView.m in Sources */,
 				63264EE4245AA1EC00C7199C /* PLVECPlaybackViewController.m in Sources */,
+				672D74CD24BBFC8B00366A34 /* PLVLiveWatchUser.m in Sources */,
 				67B941DF249334FB0051AEC9 /* PLVChatroomViewMode.m in Sources */,
-				6786785E247D015C0019596B /* PLVECChatroomController.m in Sources */,
 				6770A8E224ADB54C0072D7CA /* PLVECMoreView.m in Sources */,
-				67B2AEC02498CD8800A6964B /* PLVBaseCell.m in Sources */,
+				67B6A34A24B70D0000931A1D /* PLVLivePlayerPresenter.m in Sources */,
+				67B2AEC02498CD8800A6964B /* PLVChatCell.m in Sources */,
 				67B2AEC4249919D700A6964B /* PLVECWelcomView.m in Sources */,
 				6785813B24B46E5000A972F6 /* PLVChatTextModel.m in Sources */,
+				67BC9D7D24B80C7B008494A0 /* PLVPlaybackPlayerViewModel.m in Sources */,
+				67BB1D7724EE693000F9377C /* PLVECCommodityCellModel.m in Sources */,
 				67D700BA2476535000429B55 /* PLVECChatroomView.m in Sources */,
 				67B941C02493326D0051AEC9 /* PLVLiveUtil.m in Sources */,
 				6704FE402486534F0063EE9F /* PLVECAudioAnimalView.m in Sources */,
 				633923A92459877B00C0ACE9 /* AppDelegate.m in Sources */,
 				633923BA2459877D00C0ACE9 /* main.m in Sources */,
 				67D700A42476345B00429B55 /* PLVECLiveHomePageView.m in Sources */,
+				672D74D024BBFD0900366A34 /* PLVLiveChatUser.m in Sources */,
 				6785814324B4813F00A972F6 /* PLVPhotoBrowser.m in Sources */,
 				67C05A2324A8423900E5D5BD /* PLVECBottomView.m in Sources */,
+				672D74D424BC6C1200366A34 /* PLVECChatroomPresenter.m in Sources */,
 				67D700B42476355800429B55 /* PLVECSwitchView.m in Sources */,
 				670F3558247B6065004F2291 /* PLVECCardView.m in Sources */,
 				67D700B12476354D00429B55 /* PLVECPlayerContolView.m in Sources */,
@@ -891,11 +1037,13 @@
 				6713072024A201F500A7EC5B /* PLVSceneLoginManager.m in Sources */,
 				63264EDD245A61E600C7199C /* PLVECLiveViewController.m in Sources */,
 				6713072C24A2422A00A7EC5B /* PLVECLivePlayerViewController.m in Sources */,
-				67B2AEBD2498CD5E00A6964B /* PLVCellModel.m in Sources */,
+				67B2AEBD2498CD5E00A6964B /* PLVChatCellModel.m in Sources */,
+				67BC9D8024B80CA8008494A0 /* PLVBasePlayerViewModel.m in Sources */,
 				67B941DA249333A60051AEC9 /* PLVChatroomPresenter.m in Sources */,
 				67C9681024A57CFE00D8E2F6 /* PLVLiveRoomData.m in Sources */,
 				67D700A72476346A00429B55 /* PLVECLiveDetailPageView.m in Sources */,
 				67D700C02476545200429B55 /* PLVECBulletinView.m in Sources */,
+				67B6A34D24B70D1100931A1D /* PLVPlaybackPlayerPresenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1037,6 +1185,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 8BMZBNN3Q5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/PolyvLiveScenesDemo/Supporting Files/Info.plist";
@@ -1045,7 +1194,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.7;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = polyv.PolyvLiveEcommerceDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1058,6 +1207,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 8BMZBNN3Q5;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/PolyvLiveScenesDemo/Supporting Files/Info.plist";
@@ -1066,7 +1216,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.7;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = polyv.PolyvLiveEcommerceDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

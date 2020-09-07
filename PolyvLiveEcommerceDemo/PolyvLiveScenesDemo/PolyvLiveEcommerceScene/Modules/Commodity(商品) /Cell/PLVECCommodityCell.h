@@ -7,32 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PLVECCommodityModel.h"
+#import "PLVECCommodityCellModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class PLVECCommodityCell;
-@protocol PLVECCommodityCellDelegate <NSObject>
-
-- (void)commodityCell:(PLVECCommodityCell *)commodityCell didSelectButtonBeClicked:(PLVECCommodityModel *)model;
-
-@end
 
 @interface PLVECCommodityCell : UITableViewCell
 
 @property (nonatomic, strong) UIImageView *coverImageView;
 
+@property (nonatomic, strong) UILabel *showIdLabel;
+
 @property (nonatomic, strong) UILabel *nameLabel;
+
+@property (nonatomic, strong) UILabel *realPriceLabel;
 
 @property (nonatomic, strong) UILabel *priceLabel;
 
 @property (nonatomic, strong) UIButton *selectButton;
 
-/// 绑定的模型
-@property (nonatomic, strong) PLVECCommodityModel *model;
+@property (nonatomic, strong) PLVECCommodityCellModel *cellModel;
 
-/// 代理人
-@property (nonatomic, weak) id<PLVECCommodityCellDelegate> delegate;
+@property (nonatomic, weak) id<PLVECCommodityDelegate> delegate;
 
 @end
 

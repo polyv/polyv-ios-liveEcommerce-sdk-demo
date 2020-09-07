@@ -22,26 +22,40 @@
         self.coverImageView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:self.coverImageView];
         
+        self.showIdLabel = [[UILabel alloc] init];
+        self.showIdLabel.frame = CGRectMake(0, 0, 27, 16);
+        self.showIdLabel.textColor = UIColor.whiteColor;
+        self.showIdLabel.font = [UIFont systemFontOfSize:12];
+        self.showIdLabel.textAlignment = NSTextAlignmentCenter;
+        self.showIdLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0.35f];
+        [self.coverImageView addSubview:self.showIdLabel];
+        
         self.nameLabel = [[UILabel alloc] init];
         self.nameLabel.textColor = UIColor.whiteColor;
         self.nameLabel.font = [UIFont systemFontOfSize:14.0];
         self.nameLabel.numberOfLines = 2;
         [self addSubview:self.nameLabel];
         
-        self.priceLabel = [[UILabel alloc] init];
-        self.priceLabel.textColor = [UIColor colorWithRed:1 green:71/255.0 blue:58/255.0 alpha:1];
-        self.priceLabel.textAlignment = NSTextAlignmentLeft;
+        self.realPriceLabel = [[UILabel alloc] init];
+        self.realPriceLabel.textColor = [UIColor colorWithRed:1 green:71/255.0 blue:58/255.0 alpha:1];
+        self.realPriceLabel.textAlignment = NSTextAlignmentLeft;
         if (@available(iOS 8.2, *)) {
-            self.priceLabel.font = [UIFont systemFontOfSize:18.0 weight:UIFontWeightSemibold];
+            self.realPriceLabel.font = [UIFont systemFontOfSize:18.0 weight:UIFontWeightSemibold];
         } else {
-            self.priceLabel.font = [UIFont systemFontOfSize:18.0];
+            self.realPriceLabel.font = [UIFont systemFontOfSize:18.0];
         }
+        [self addSubview:self.realPriceLabel];
+        
+        self.priceLabel = [[UILabel alloc] init];
+        self.priceLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:self.priceLabel];
         
         self.selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.selectButton.layer.cornerRadius = 13.5;
         self.selectButton.layer.masksToBounds = YES;
         self.selectButton.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        self.selectButton.backgroundColor = [UIColor colorWithRed:1 green:166/255.0 blue:17/255.0 alpha:1];
+        [self.selectButton setTitle:@"去购买" forState:UIControlStateNormal];
         [self.selectButton addTarget:self action:@selector(selectButtonAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.selectButton];
     }
@@ -55,51 +69,39 @@
     CGFloat positionX = CGRectGetMaxX(self.coverImageView.frame) + 10;
     self.nameLabel.frame = CGRectMake(positionX, 0, CGRectGetWidth(self.bounds)-positionX, 40);
     [self.nameLabel sizeToFit]; // 顶端对齐
-    self.priceLabel.frame = CGRectMake(positionX, CGRectGetHeight(self.bounds)-25, 200, 25);
+    self.realPriceLabel.frame = CGRectMake(positionX, CGRectGetHeight(self.bounds)-25, 200, 25);
+    [self.realPriceLabel sizeToFit];
     self.selectButton.frame = CGRectMake(CGRectGetWidth(self.bounds)-60, CGRectGetHeight(self.bounds)-28, 60, 28);
+    CGFloat priceLabelX = CGRectGetMaxX(self.realPriceLabel.frame) + 4;
+    self.priceLabel.frame = CGRectMake(priceLabelX, CGRectGetMinY(self.realPriceLabel.frame)+4, CGRectGetMinX(self.selectButton.frame)-10-priceLabelX, 17);
 }
 
-#pragma mark - Action
+#pragma mark - Setter
 
-- (void)setModel:(PLVECCommodityModel *)model {
-    _model = model;
-    if (model) {
-        self.nameLabel.text = model.name;
-        self.priceLabel.text = [NSString stringWithFormat:@"¥ %.2f",model.price];
-        self.coverImageView.image = nil;
-        self.selectButton.hidden = NO;
-        NSString *urlStr = model.cover;
-        if (![urlStr hasPrefix:@"http"]) {
-            urlStr =  [@"https:" stringByAppendingString:urlStr];
-        }
-        [PLVFdUtil setImageWithURL:[NSURL URLWithString:urlStr] inImageView:self.coverImageView completed:^(UIImage *image, NSError *error, NSURL *imageURL) {
-            if (error) {
-                NSLog(@"-setModel:图片加载失败，%@",imageURL);
-            }
-        }];
-        switch (model.status) {
-            case 1: { // 上架
-                self.selectButton.enabled = YES;
-                [self.selectButton setTitle:@"去购买" forState:UIControlStateNormal];
-                self.selectButton.backgroundColor = [UIColor colorWithRed:1 green:166/255.0 blue:17/255.0 alpha:1];
-            } break;
-            case 2: { // 下架
-                self.selectButton.enabled = NO;
-                [self.selectButton setTitle:@"已下架" forState:UIControlStateNormal];
-                self.selectButton.backgroundColor = [UIColor colorWithWhite:205/255.0 alpha:1];
-            } break;
-            default:
-                self.selectButton.hidden = YES;
-                break;
-        }
+- (void)setCellModel:(PLVECCommodityCellModel *)cellModel {
+    _cellModel = cellModel;
+    if (!cellModel) {
+        return;
     }
+    
+    self.nameLabel.text = cellModel.model.name;
+    self.realPriceLabel.text = cellModel.realPriceStr;
+    self.priceLabel.attributedText = cellModel.priceAtrrStr;
+    self.showIdLabel.text = [NSString stringWithFormat:@"%ld",cellModel.model.showId];
+    
+    self.coverImageView.image = nil;
+    [PLVFdUtil setImageWithURL:cellModel.coverUrl inImageView:self.coverImageView completed:^(UIImage *image, NSError *error, NSURL *imageURL) {
+        if (error) {
+            NSLog(@"-setCellModel:图片加载失败，%@",imageURL);
+        }
+    }];
 }
 
 #pragma mark - Action
 
 - (void)selectButtonAction {
-    if (self.model && [self.delegate respondsToSelector:@selector(commodityCell:didSelectButtonBeClicked:)]) {
-        [self.delegate commodityCell:self didSelectButtonBeClicked:self.model];
+    if (self.cellModel && [self.delegate respondsToSelector:@selector(commodity:didSelect:)]) {
+        [self.delegate commodity:self didSelect:self.cellModel];
     }
 }
 
