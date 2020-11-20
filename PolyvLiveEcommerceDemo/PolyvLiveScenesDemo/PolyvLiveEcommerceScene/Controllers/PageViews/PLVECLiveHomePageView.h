@@ -26,8 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 
 - (void)likeActionInHomePageView:(PLVECLiveHomePageView *)homePageView;
-
+/// 切换线路
 - (void)homePageView:(PLVECLiveHomePageView *)homePageView switchPlayLine:(NSUInteger)line;
+/// 切换清晰度
+- (void)homePageView:(PLVECLiveHomePageView *)homePageView switchCodeRate:(NSString *)codeRate;
 
 - (void)homePageView:(PLVECLiveHomePageView *)homePageView switchAudioMode:(BOOL)audioMode;
 
@@ -45,6 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PLVECCommodityView *commodityView;       // 商品视图
 @property (nonatomic, strong) PLVECMoreView *moreView;                 // 更多视图
 @property (nonatomic, strong) PLVECSwitchView *switchLineView;         // 切换视图
+@property (nonatomic, strong) PLVECSwitchView *switchCodeRateView;     // 清晰度切换视图
 @property (nonatomic, strong) PLVECGiftView *giftView;                 // 礼物视图
 
 @property (nonatomic, strong) UIButton *likeButton;
@@ -58,11 +61,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updateChannelInfo:(NSString *)publisher coverImage:(NSString *)coverImage;
 
-- (void)updateWatchViewCount:(NSUInteger)watchViewCount;
+- (void)updateOnlineCount:(NSUInteger)onlineCount;
 
 - (void)updateLikeCount:(NSUInteger)likeCount;
 
-- (void)updateLineCount:(NSUInteger)lineCount;
+- (void)updateLineCount:(NSUInteger)lineCount defaultLine:(NSUInteger)line;
+
+- (void)updateCodeRateItems:(NSArray <NSString *>*)codeRates defaultCodeRate:(NSString *)codeRate;
 
 - (void)updatePlayerState:(BOOL)playing;
 

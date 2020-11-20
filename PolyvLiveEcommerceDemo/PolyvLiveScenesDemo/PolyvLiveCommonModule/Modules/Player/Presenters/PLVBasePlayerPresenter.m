@@ -13,6 +13,9 @@
 - (void)setupPlayerWithDisplayView:(UIView *)displayView {
 }
 
+- (void)setPlayerFrame:(CGRect)rect {
+}
+
 - (void)destroy {
 }
 

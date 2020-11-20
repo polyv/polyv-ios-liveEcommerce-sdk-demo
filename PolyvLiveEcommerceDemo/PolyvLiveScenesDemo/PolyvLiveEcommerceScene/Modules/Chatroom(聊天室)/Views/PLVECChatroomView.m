@@ -9,6 +9,7 @@
 #import "PLVECChatroomView.h"
 #import "PLVECWelcomView.h"
 #import "PLVECUtils.h"
+#import <MJRefresh/MJRefresh.h>
 
 #define TEXT_MAX_COUNT 200
 
@@ -16,6 +17,8 @@
 
 @interface PLVECChatroomView () <UITextViewDelegate>
 
+/// 聊天室列表顶部加载更多控件
+@property (nonatomic, strong) MJRefreshNormalHeader *refresher;
 @property (nonatomic, strong) PLVECWelcomView *welcomView;
 @property (nonatomic, assign) CGRect originWelcomViewFrame;
 
@@ -73,6 +76,7 @@
         self.tableView.estimatedRowHeight = 0.0;
         self.tableView.estimatedSectionHeaderHeight = 0.0;
         self.tableView.estimatedSectionFooterHeight = 0.0;
+        self.tableView.mj_header = self.refresher;
         [self.tableViewBackgroundView addSubview:self.tableView];
         
         self.textAreaView = [[UIView alloc] init];
@@ -146,6 +150,16 @@
     return _textView;
 }
 
+- (MJRefreshNormalHeader *)refresher {
+    if (!_refresher) {
+        _refresher = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshAction:)];
+        _refresher.lastUpdatedTimeLabel.hidden = YES;
+        _refresher.stateLabel.hidden = YES;
+        [_refresher setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleWhite];
+    }
+    return _refresher;
+}
+
 #pragma mark - Action
 
 - (void)textAreaViewTapAction {
@@ -161,6 +175,10 @@
     if (self.textView.isFirstResponder) {
         [self.textView resignFirstResponder];
     }
+}
+
+- (void)refreshAction:(MJRefreshNormalHeader *)refreshHeader {
+    [self.presenter loadHistoryDataWithCount:10];
 }
 
 #pragma mark - KVO
@@ -240,6 +258,21 @@
         [self shutdownWelcomView];
         [self showWelcomeView:message duration:duration];
     }
+}
+
+- (void)loadHistoryDataSuccessAtFirstTime:(BOOL)first hasNoMoreMessage:(BOOL)noMore {
+    [self.refresher endRefreshing];
+    [self.tableView reloadData];
+    if (first) {
+        [self scrollsToBottom:NO];
+    }
+    if (noMore) {
+        [self.refresher removeFromSuperview];
+    }
+}
+
+- (void)loadHistoryDataFailure {
+    [self.refresher endRefreshing];
 }
 
 #pragma mark - Private

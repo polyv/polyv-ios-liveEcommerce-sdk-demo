@@ -7,7 +7,6 @@
 //
 
 #import "PLVECChatCellModel.h"
-#import "PLVECUtils.h"
 #import "PLVEmoticonManager.h"
 
 @interface PLVECChatCellModel ()
@@ -18,7 +17,7 @@
 
 @implementation PLVECChatCellModel
 
-- (void)reloadModelWithChatModel:(PLVChatModel *)chatModel {
+- (void)reloadModelWithChatModel:(PLVChatMessageModel *)chatModel {
     [super reloadModelWithChatModel:chatModel];
     [self createRichTextMessage];
 }
@@ -49,12 +48,6 @@
         NSString *content = [(PLVChatTextModel *)self.chatModel content];
         NSMutableAttributedString *emotionAttrStr = [PLVEmoticonManager.sharedManager converEmoticonTextToEmotionFormatText:content attributes:@{NSFontAttributeName:textFont,NSForegroundColorAttributeName:textColor}];
         [mAttributedStr appendAttributedString:emotionAttrStr];
-    } else if ([self.chatModel isKindOfClass:PLVChatImageModel.class]) {
-        UIImage *placeholderImage = [PLVECUtils imageForWatchResource:@"plv_chatroom_thumbnail_imag"];
-        NSTextAttachment *placeholderAttach = [[NSTextAttachment alloc] init];
-        placeholderAttach.bounds = CGRectMake(0, -1.5, 36.0, 36.0);
-        placeholderAttach.image = placeholderImage;
-        [mAttributedStr appendAttributedString:[NSAttributedString attributedStringWithAttachment:placeholderAttach]];
     }
 
     if (user.specialIdentity && user.actor) {

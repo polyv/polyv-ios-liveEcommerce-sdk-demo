@@ -7,7 +7,7 @@
 //
 
 #import "PLVLivePlayerPresenter.h"
-#import <PolyvCloudClassSDK/PLVLivePlayerController.h>
+#import <PolyvCloudClassSDK/PolyvCloudClassSDK.h>
 
 @interface PLVLivePlayerPresenter () <PLVPlayerControllerDelegate, PLVLivePlayerControllerDelegate>
 
@@ -43,6 +43,11 @@
     self.player.cameraClosed = NO;
     self.viewModel.player = self.player;
 }
+
+- (void)setPlayerFrame:(CGRect)rect {
+    [self.player setFrame:rect];
+}
+
 
 - (void)destroy {
     [self.player clearPlayersAndTimers];
@@ -113,6 +118,9 @@
     self.roomData.lines = lines;
     self.roomData.curCodeRate = codeRate;
     self.roomData.codeRateItems = codeRateItems;
+    if ([self.view respondsToSelector:@selector(presenterChannelPlayOptionInfoDidUpdate:)]) {
+        [self.view presenterChannelPlayOptionInfoDidUpdate:self];
+    }
 }
 
 /// 加载主播放器失败（原因：1.网络请求失败；2.如果是直播，且该频道设置了限制条件）
@@ -153,6 +161,11 @@
 
 /// 主播放器已准备好开始播放正片
 - (void)playerController:(PLVPlayerController *)playerController mainPlaybackIsPreparedToPlay:(NSNotification *)notification {
+    CGSize naturalSize = ((PLVIJKFFMoviePlayerController *)notification.object).naturalSize;
+    if ([self.view respondsToSelector:@selector(presenter:videoSizeChange:)]) {
+        [self.view presenter:self videoSizeChange:naturalSize];
+    }
+
     self.viewModel.warmUpPlaying = NO;
     if ([self.view respondsToSelector:@selector(presenter:mainPlaybackIsPreparedToPlay:)]) {
         [self.view presenter:self mainPlaybackIsPreparedToPlay:notification.userInfo];
@@ -221,6 +234,9 @@
 /// 频道信息更新
 - (void)liveVideoChannelDidUpdate:(PLVLiveVideoChannel *)channel {
     self.roomData.sessionId = channel.sessionId;
+    if ([self.view respondsToSelector:@selector(presenterChannelInfoChanged:)]) {
+        [self.view presenterChannelInfoChanged:self];
+    }
 }
 
 /// 直播播放器的播放状态改变

@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class PLVECMoreView;
 @protocol PLVECMoreViewDelegate <NSObject>
 
+@required
 - (NSArray<PLVECMoreViewItem *> *)dataSourceOfMoreView:(PLVECMoreView *)moreView;
 
 - (void)moreView:(PLVECMoreView *)moreView didSelectItem:(PLVECMoreViewItem *)item index:(NSUInteger)index;

@@ -12,9 +12,6 @@
 /// 直播带货场景直播页
 @interface PLVECLiveViewController : UIViewController
 
-/// 横屏显示
-@property (nonatomic, assign) BOOL landscapeMode;
-
 /// 初始化当前控制器方法
 - (instancetype)initWithLiveRoomData:(PLVLiveRoomData *)roomData;
 

@@ -6,11 +6,11 @@
 //  Copyright © 2020 polyv. All rights reserved.
 //
 
-#import "PLVChatCell.h"
+#import "PLVChatBaseCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PLVECChatCell : PLVChatCell
+@interface PLVECChatCell : PLVChatBaseCell
 
 @end
 

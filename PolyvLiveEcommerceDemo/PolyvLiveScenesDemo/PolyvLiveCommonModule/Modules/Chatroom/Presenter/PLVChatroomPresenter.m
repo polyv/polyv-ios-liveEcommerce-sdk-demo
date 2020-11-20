@@ -11,7 +11,7 @@
 #import <PolyvCloudClassSDK/PLVLiveVideoAPI.h>
 #import "PLVChatTextModel.h"
 #import "PLVChatImageModel.h"
-#import "PLVChatCell.h"
+#import "PLVChatBaseCell.h"
 #import "PLVSocketManager.h"
 
 static inline void plv_dict_set(NSMutableDictionary *mDict, id aKey, id anObject) {
@@ -35,6 +35,9 @@ static inline void plv_dict_set(NSMutableDictionary *mDict, id aKey, id anObject
 
 @property (nonatomic, assign) NSUInteger likeCountOfMe;
 @property (nonatomic, assign) NSUInteger likeCountOfHttp;
+
+@property (nonatomic, assign) BOOL loadingHistory;
+@property (nonatomic, assign) BOOL noMoreHistory;
 
 @end
 
@@ -80,6 +83,44 @@ static const NSTimeInterval ChatroomRefreshFrequency = 0.5;
 
 #pragma mark - External API
 
+- (void)loadHistoryDataWithCount:(NSInteger)count {
+    if (self.loadingHistory) {
+        return;
+    }
+    self.loadingHistory = YES;
+    
+    __weak typeof(self) weakSelf = self;
+    NSUInteger roomId = [self.roomData.roomId longLongValue];
+    NSInteger startIndex = self.viewModel.dataSource.count;
+    NSInteger endIndex = startIndex + count - 1;
+    [PLVLiveVideoAPI requestChatRoomHistoryWithRoomId:roomId startIndex:startIndex endIndex:endIndex completion:^(NSArray * _Nonnull historyList) {
+        weakSelf.loadingHistory = NO;
+        BOOL success = (historyList && [historyList isKindOfClass:[NSArray class]]);
+        if (success) {
+            for (NSDictionary *dict in historyList) {
+                PLVChatCellModel *model = [weakSelf modelWithHistoryMessageDict:dict];
+                if (model && [model isKindOfClass:[PLVChatCellModel class]]) {
+                    [weakSelf.viewModel insertModel:model atIndex:0];
+                }
+            }
+            weakSelf.noMoreHistory = [historyList count] < count;
+            if (weakSelf.view &&
+                [weakSelf.view respondsToSelector:@selector(loadHistoryDataSuccessAtFirstTime:hasNoMoreMessage:)]) {
+                [weakSelf.view loadHistoryDataSuccessAtFirstTime:(startIndex == 0) hasNoMoreMessage:weakSelf.noMoreHistory];
+            }
+        } else {
+            if (weakSelf.view && [weakSelf.view respondsToSelector:@selector(loadHistoryDataFailure)]) {
+                [weakSelf.view loadHistoryDataFailure];
+            }
+        }
+    } failure:^(NSError * _Nonnull error) {
+        weakSelf.loadingHistory = NO;//
+        if (weakSelf.view && [weakSelf.view respondsToSelector:@selector(loadHistoryDataFailure)]) {
+            [weakSelf.view loadHistoryDataFailure];
+        }
+    }];
+}
+
 - (BOOL)speakMessage:(NSString *)message {
     PLVLiveWatchUser *watchUser = self.roomData.watchUser;
     PLVChatTextModel *textModel = [PLVChatTextModel textModelWithNickName:watchUser.nickName content:message];
@@ -115,7 +156,7 @@ static const NSTimeInterval ChatroomRefreshFrequency = 0.5;
 #pragma mark 子类需重写的方法
 
 - (Class)speakChatCellClass {
-    return PLVChatCell.class;
+    return PLVChatBaseCell.class;
 }
 
 - (Class)speakChatCellModelClass {
@@ -123,7 +164,7 @@ static const NSTimeInterval ChatroomRefreshFrequency = 0.5;
 }
 
 - (Class)imageChatCellClass {
-    return PLVChatCell.class;
+    return PLVChatBaseCell.class;
 }
 
 - (Class)imageChatCellModelClass {
@@ -134,7 +175,7 @@ static const NSTimeInterval ChatroomRefreshFrequency = 0.5;
 
 /// 有用户登陆事件
 - (void)loginEvent:(NSDictionary *)data {
-    self.viewModel.onlineCount = PLV_SafeIntegerForDictKey(data, @"onlineUserNumber");
+    self.roomData.onlineCount = PLV_SafeIntegerForDictKey(data, @"onlineUserNumber");
     
     NSDictionary *user = PLV_SafeDictionaryForDictKey(data, @"user");
     NSString *userId = PLV_SafeStringForDictKey(user, @"userId");;
@@ -148,7 +189,7 @@ static const NSTimeInterval ChatroomRefreshFrequency = 0.5;
 
 /// 有用户登出事件
 - (void)logoutEvent:(NSDictionary *)data {
-    self.viewModel.onlineCount = PLV_SafeIntegerForDictKey(data, @"onlineUserNumber");
+    self.roomData.onlineCount = PLV_SafeIntegerForDictKey(data, @"onlineUserNumber");
 }
 
 /// 公告事件
@@ -308,6 +349,43 @@ static const NSTimeInterval ChatroomRefreshFrequency = 0.5;
 }
 
 #pragma mark - Private
+
+- (PLVChatCellModel *)modelWithHistoryMessageDict:(NSDictionary *)messageDict {
+    PLVChatCellModel *model = nil;
+    
+    NSString *msgType = PLV_SafeStringForDictKey(messageDict, @"msgType");
+    NSString *msgSource = PLV_SafeStringForDictKey(messageDict, @"msgSource");
+    NSString *msgId = PLV_SafeStringForDictKey(messageDict, @"id");
+    NSDictionary *user = PLV_SafeDictionaryForDictKey(messageDict, @"user");
+    NSString *uid = PLV_SafeStringForDictKey(user, @"uid");
+    
+    if (msgSource && [msgSource isEqualToString:@"chatImg"]) { // 图片消息
+        NSDictionary *contentDict = PLV_SafeDictionaryForDictKey(messageDict, @"content");
+        NSDictionary *size = PLV_SafeDictionaryForDictKey(contentDict, @"size");
+        NSString *uploadImgUrl = PLV_SafeStringForDictKey(contentDict, @"uploadImgUrl");
+        NSString *imgId = PLV_SafeStringForDictKey(contentDict, @"id");
+        PLVChatImageModel *imageModel = [PLVChatImageModel imageModelWithUser:user imageUrl:uploadImgUrl imageId:imgId size:size];
+        imageModel.msgId = msgId;
+        PLVChatCellModel *cellModel = [[self.imageChatCellModelClass alloc] init];
+        if ([cellModel isKindOfClass:PLVChatCellModel.class]) {
+            [cellModel reloadModelWithChatModel:imageModel];
+        }
+        model = cellModel;
+    } else if (!msgType && !msgSource && ![uid isEqualToString:@"1"] && ![uid isEqualToString:@"2"]) { // 文本消息
+        NSString *content = PLV_SafeStringForDictKey(messageDict, @"content");
+        if (content) {
+            PLVChatTextModel *textModel = [PLVChatTextModel textModelWithUser:user content:content];
+            textModel.msgId = msgId;
+            PLVChatCellModel *cellModel = [[self.speakChatCellModelClass alloc] init];
+            if ([cellModel isKindOfClass:PLVChatCellModel.class]) {
+                [cellModel reloadModelWithChatModel:textModel];
+            }
+            model = cellModel;
+        }
+    }
+    
+    return model;
+}
 
 #pragma mark Emit socket message
 
@@ -535,8 +613,8 @@ static const NSTimeInterval ChatroomRefreshFrequency = 0.5;
         return defaultCell();
     }
     
-    PLVChatCell *cell;
-    if ([chatCellClass isSubclassOfClass:PLVChatCell.class]) {
+    PLVChatBaseCell *cell;
+    if ([chatCellClass isSubclassOfClass:PLVChatBaseCell.class]) {
         NSString *identifier = [chatCellClass identifier];
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (!cell) {
@@ -573,8 +651,8 @@ static const NSTimeInterval ChatroomRefreshFrequency = 0.5;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([cell isKindOfClass:PLVChatCell.class]) {
-        [(PLVChatCell *)cell layoutCell];
+    if ([cell isKindOfClass:PLVChatBaseCell.class]) {
+        [(PLVChatBaseCell *)cell layoutCell];
     }
 }
 

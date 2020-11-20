@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PLVChatModel.h"
+#import "PLVChatMessageModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PLVChatImageModel : PLVChatModel
+@interface PLVChatImageModel : PLVChatMessageModel
 
 /// 图片id
 @property (nonatomic, copy) NSString *imageId;

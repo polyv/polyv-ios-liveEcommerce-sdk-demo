@@ -15,6 +15,7 @@
 @property (nonatomic, strong) PLVPlaybackPlayerPresenter *presenter;
 
 @property (nonatomic, strong) UIView *displayView;
+@property (nonatomic, assign) CGRect displayRect;
 
 @end
 
@@ -62,16 +63,12 @@
 }
 
 - (void)layoutViewsFrame {
-    CGFloat scale = 16.0 / 9.0;
-    if (self.landscapeMode) {
-        // 16:9 显示模式
-        self.displayView.frame = CGRectMake(0, 130, CGRectGetWidth(self.view.bounds), CGRectGetWidth(self.view.bounds) / scale);
-    } else {
-        // 9:16 显示模式(刘海全屏裁剪)
-        self.displayView.frame = CGRectMake(-(CGRectGetHeight(self.view.bounds) / scale - CGRectGetWidth(self.view.bounds)) / 2, 0, CGRectGetHeight(self.view.bounds) / scale, CGRectGetHeight(self.view.bounds));
-        
-        // 9:16 显示模式(刘海非全屏不裁剪)
-        //self.playerSuperView.frame = self.view.bounds;
+    if (CGRectEqualToRect(self.displayRect, CGRectZero)) {
+        CGFloat scale = 16.0 / 9.0;
+        CGFloat width = CGRectGetWidth(self.view.bounds);
+        CGFloat height = CGRectGetWidth(self.view.bounds) / scale;
+        CGFloat originY = (CGRectGetHeight(self.view.bounds) - height) / 2.0;
+        self.displayView.frame = CGRectMake(0, originY, width, height);
     }
 }
 
@@ -111,6 +108,34 @@
     if (_playbackProgressFlag) {
         [self.delegate updateDowloadProgress:dowloadProgress playedProgress:playedProgress currentPlaybackTime:currentPlaybackTime duration:duration];
     }
+}
+
+- (void)presenter:(PLVBasePlayerPresenter *)presenter videoSizeChange:(CGSize)videoSize {
+    CGSize viewSize = self.view.bounds.size;
+    if (videoSize.width >= videoSize.height) {
+        CGFloat width = viewSize.width;
+        CGFloat height = width * videoSize.height / videoSize.width;
+        CGFloat originY = (CGRectGetHeight(self.view.bounds) - height) / 2.0;
+        self.displayRect = CGRectMake(0, originY, width, height);
+    } else {
+        CGFloat w_h = videoSize.width / videoSize.height;
+        CGFloat w_h_base = viewSize.width / viewSize.height;
+        CGRect displayerRect = self.view.bounds;
+        if (w_h > w_h_base) {
+            displayerRect.origin.y = 0;
+            displayerRect.size.height = viewSize.height;
+            displayerRect.size.width = viewSize.height * w_h;
+            displayerRect.origin.x = (viewSize.width - displayerRect.size.width) / 2.0;
+        } else if (w_h < w_h_base) {
+            displayerRect.origin.x = 0;
+            displayerRect.size.width = viewSize.width;
+            displayerRect.size.height = viewSize.width / w_h;
+            displayerRect.origin.y = (viewSize.height - displayerRect.size.height) / 2.0;
+        }
+        self.displayRect = displayerRect;
+    }
+    self.displayView.frame = self.displayRect;
+    [self.presenter setPlayerFrame:self.displayView.bounds];
 }
 
 @end

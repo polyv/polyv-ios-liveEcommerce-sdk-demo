@@ -7,7 +7,7 @@
 //
 
 #import "PLVChatCellModel.h"
-#import "PLVChatCell.h"
+#import "PLVChatBaseCell.h"
 
 @implementation PLVChatCellModel
 
@@ -23,19 +23,19 @@
 
 - (float)cellHeight {
     if (_cellHeight == 0) {
-        _cellHeight = [PLVChatCell cellHeightWithModel:self];
+        _cellHeight = [PLVChatBaseCell cellHeightWithModel:self];
     }
     return _cellHeight;
 }
 
-- (void)reloadModelWithChatModel:(PLVChatModel *)chatModel {
+- (void)reloadModelWithChatModel:(PLVChatMessageModel *)chatModel {
     self.chatModel = chatModel;
 }
 
-- (PLVChatCell *)makeCellWithTableView:(UITableView *)tableView {
-    PLVChatCell *cell = [tableView dequeueReusableCellWithIdentifier:PLVChatCell.identifier];
+- (PLVChatBaseCell *)makeCellWithTableView:(UITableView *)tableView {
+    PLVChatBaseCell *cell = [tableView dequeueReusableCellWithIdentifier:PLVChatBaseCell.identifier];
     if (!cell) {
-        cell = [[PLVChatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PLVChatCell.identifier];
+        cell = [[PLVChatBaseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PLVChatBaseCell.identifier];
     }
     return cell;
 }

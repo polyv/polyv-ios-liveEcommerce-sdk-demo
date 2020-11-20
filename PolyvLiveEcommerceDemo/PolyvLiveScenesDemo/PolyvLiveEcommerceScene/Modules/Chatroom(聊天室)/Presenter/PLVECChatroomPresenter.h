@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 该场景下的聊天室业务类
 @interface PLVECChatroomPresenter : PLVChatroomPresenter
 
+/// 用于socket登陆后首次加载历史消息，只允许调用一次
+- (void)loadHistoryAtFirstTime;
+
 @end
 
 NS_ASSUME_NONNULL_END

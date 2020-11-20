@@ -8,8 +8,10 @@
 
 #import "PLVECChatCell.h"
 #import "PLVECChatCellModel.h"
+#import "PLVECUtils.h"
 #import "PLVPhotoBrowser.h"
 #import <PolyvFoundationSDK/PLVFdUtil.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface PLVECChatLabel : UILabel
 
@@ -42,6 +44,10 @@
 
 @property (nonatomic, strong) PLVECChatLabel *contentLB;
 
+@property (nonatomic, strong) UIImageView *chatImageView;
+
+@property (nonatomic, strong) UIView *bubbleView;
+
 @property (nonatomic, strong) PLVPhotoBrowser *photoBrowser;
 
 @end
@@ -53,29 +59,50 @@
         return 0;
     }
     // TODO: 计算一次，后面不重复计算该值
-    PLVECChatCellModel *chatModel = (PLVECChatCellModel *)model;
-    CGRect rect = [chatModel.attrCont boundingRectWithSize:CGSizeMake(chatModel.cellWidth-16.0, MAXFLOAT)
+    PLVECChatCellModel *cellModel = (PLVECChatCellModel *)model;
+    CGRect rect = [cellModel.attrCont boundingRectWithSize:CGSizeMake(cellModel.cellWidth-16.0, MAXFLOAT)
                                                    options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
                                                    context:nil];
-    // 4+4+4
-    return rect.size.height + 12.0;
+    CGFloat cellHeight = 0;
+    id chatModel = [(PLVECChatCellModel *)model chatModel];
+    if (chatModel && [chatModel isKindOfClass:[PLVChatImageModel class]]) {
+        if (cellModel.cellWidth - 16.0 - rect.size.width < 40) {// 图片换行显示
+            cellHeight = 4 + rect.size.height + 4 + 36;
+        } else { // 图片跟昵称同行显示
+            cellHeight = 4 + 36;
+        }
+    } else {
+        cellHeight = 4 + rect.size.height;
+    }
+    
+    return cellHeight + 4 + 4;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.bubbleView = [[UIView alloc] init];
+        self.bubbleView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.39];
+        self.bubbleView.layer.cornerRadius = 10;
+        self.bubbleView.layer.masksToBounds = YES;
+        [self addSubview:self.bubbleView];
+        
         self.contentLB = [[PLVECChatLabel alloc] init];
         self.contentLB.numberOfLines = 0;
-        self.contentLB.edgeInsets = UIEdgeInsetsMake(4, 8, 4, 8);
         self.contentLB.textAlignment = NSTextAlignmentLeft;
-        self.contentLB.backgroundColor = [UIColor colorWithWhite:0 alpha:0.39];
-        self.contentLB.layer.cornerRadius = 10.0;
-        self.contentLB.layer.masksToBounds = YES;
         [self addSubview:self.contentLB];
         
+        self.chatImageView = [[UIImageView alloc] init];
+        self.chatImageView.layer.masksToBounds = YES;
+        self.chatImageView.layer.cornerRadius = 4.0;
+        self.chatImageView.userInteractionEnabled = YES;
+        self.chatImageView.contentMode = UIViewContentModeScaleAspectFill;
+        self.chatImageView.hidden = YES;
+        [self addSubview:self.chatImageView];
+        
         self.photoBrowser = [[PLVPhotoBrowser alloc] init];
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction)];
-        [self addGestureRecognizer:tapGesture];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureAction:)];
+        [self.chatImageView addGestureRecognizer:tapGesture];
     }
     return self;
 }
@@ -85,35 +112,44 @@
         return;
     }
     
-    PLVECChatCellModel *chatModel = (PLVECChatCellModel *)self.model;
-    self.contentLB.attributedText = chatModel.attrCont;
-    CGSize newSize = [self.contentLB sizeThatFits:CGSizeMake(chatModel.cellWidth, MAXFLOAT)];
-    self.contentLB.frame = CGRectMake(0, 0, newSize.width , newSize.height);
+    PLVECChatCellModel *cellModel = (PLVECChatCellModel *)self.model;
+    self.contentLB.attributedText = cellModel.attrCont;
+    CGSize newSize = [self.contentLB sizeThatFits:CGSizeMake(cellModel.cellWidth - 16, MAXFLOAT)];
+    CGFloat contentWidth = 8 + newSize.width + 8;
+    CGFloat contentHeight = 4 + newSize.height + 4;
+    self.contentLB.frame = CGRectMake(8, 4, newSize.width, newSize.height);
+    
+    id chatModel = [(PLVECChatCellModel *)self.model chatModel];
+    if (chatModel && [chatModel isKindOfClass:[PLVChatImageModel class]]) {
+        PLVChatImageModel *imageModel = (PLVChatImageModel *)chatModel;
+        if (imageModel.imageUrl) {
+            UIImage *placeholderImage = [PLVECUtils imageForWatchResource:@"plv_chatroom_thumbnail_imag"];
+            [self.chatImageView sd_setImageWithURL:[NSURL URLWithString:imageModel.imageUrl]
+                                  placeholderImage:placeholderImage
+                                           options:SDWebImageRetryFailed];
+        }
+        if (cellModel.cellWidth - 16 - newSize.width < 40) {
+            self.chatImageView.frame = CGRectMake(8, 4 + newSize.height + 4, 36, 36);
+            contentHeight += 4 + 36;
+        } else {
+            self.chatImageView.frame = CGRectMake(8 + newSize.width + 4, 4, 36, 36);
+            contentWidth += 4 + 36;
+            contentHeight = 4 + 36 + 4;
+        }
+        
+        self.chatImageView.hidden = NO;
+    } else {
+        self.chatImageView.hidden = YES;
+    }
+    self.bubbleView.frame = CGRectMake(0, 0, contentWidth, contentHeight);
 }
 
 #pragma mark - Action
 
-- (void)tapGestureAction {
-    if (![self.model isKindOfClass:PLVECChatCellModel.class]) {
-        return;
-    }
-    
-    if ([[(PLVECChatCellModel *)self.model chatModel] isKindOfClass:PLVChatImageModel.class]) {
-        self.userInteractionEnabled = NO;
-        PLVChatImageModel *imageModel = (PLVChatImageModel *)[(PLVECChatCellModel *)self.model chatModel];
-        UIImageView *imageView = [[UIImageView alloc] init];
-        __weak typeof(self)weakSelf = self;
-        [PLVFdUtil setImageWithURL:[NSURL URLWithString:imageModel.imageUrl] inImageView:imageView completed:^(UIImage *image, NSError *error, NSURL *imageURL) {
-            weakSelf.userInteractionEnabled = YES;
-            if (error) {
-                NSLog(@"请求失败！%@",error.localizedDescription);
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf.photoBrowser scaleImageViewToFullScreen:imageView];
-                });
-            }
-        }];
-    }
+- (void)tapGestureAction:(UIGestureRecognizer *)sender {
+    UIImageView *imageView = (UIImageView *)sender.view;
+    [self.photoBrowser scaleImageViewToFullScreen:imageView];
 }
+
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "PLVPlaybackPlayerPresenter.h"
-#import <PolyvCloudClassSDK/PLVVodPlayerController.h>
+#import <PolyvCloudClassSDK/PolyvCloudClassSDK.h>
 
 @interface PLVPlaybackPlayerPresenter () <PLVPlayerControllerDelegate, PLVVodPlayerControllerDelegate>
 
@@ -44,6 +44,10 @@
                                                     displayView:displayView
                                                        delegate:self];
     self.viewModel.player = self;
+}
+
+- (void)setPlayerFrame:(CGRect)rect {
+    [self.player setFrame:rect];
 }
 
 - (void)destroy {
@@ -116,6 +120,11 @@
 
 /// 主播放器已准备好开始播放正片
 - (void)playerController:(PLVPlayerController *)playerController mainPlaybackIsPreparedToPlay:(NSNotification *)notification {
+    CGSize naturalSize = ((PLVIJKFFMoviePlayerController *)notification.object).naturalSize;
+    if ([self.view respondsToSelector:@selector(presenter:videoSizeChange:)]) {
+        [self.view presenter:self videoSizeChange:naturalSize];
+    }
+
     if ([self.view respondsToSelector:@selector(presenter:mainPlaybackIsPreparedToPlay:)]) {
         [self.view presenter:self mainPlaybackIsPreparedToPlay:notification.userInfo];
     }

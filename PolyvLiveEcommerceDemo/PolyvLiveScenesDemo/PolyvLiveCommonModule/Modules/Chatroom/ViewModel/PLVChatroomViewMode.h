@@ -24,10 +24,6 @@
 @property (nonatomic, strong) NSMutableArray<NSDictionary *> *loginUserCacheQueue;
 /// 登陆用户（自己）
 @property (nonatomic, strong) NSDictionary *loginUserOfMe;
-
-/// 在线人数
-@property (nonatomic, assign) NSUInteger onlineCount;
-
 /// 房间状态
 @property (nonatomic, getter=isClosed) BOOL closed;
 

@@ -17,6 +17,11 @@
 /// 直播播放器状态改变回调
 - (void)presenter:(PLVLivePlayerPresenter *)presenter livePlayerStateDidChange:(LivePlayerState)livePlayerState;
 
+- (void)presenterChannelInfoChanged:(PLVLivePlayerPresenter *)presenter;
+
+/// 频道播放选项信息更新
+- (void)presenterChannelPlayOptionInfoDidUpdate:(PLVLivePlayerPresenter *)presenter;
+
 @end
 
 typedef void(^LoadPlayerCompletionBlock)(NSError *error);

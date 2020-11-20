@@ -26,6 +26,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showWelcomeView:(NSString *)message duration:(NSTimeInterval)duration;
 
+/// 加载聊天记录（调用方法 '-loadHistoryDataWithCount:'）成功回调
+/// first 表示是否第一次加载聊天记录
+/// noMore： YES - 没有更多历史聊天记录；NO - 还有更多历史聊天记录
+- (void)loadHistoryDataSuccessAtFirstTime:(BOOL)first hasNoMoreMessage:(BOOL)noMore;
+
+/// 加载聊天记录（调用方法 '-loadHistoryDataWithCount:'）失败回调
+- (void)loadHistoryDataFailure;
+
 @end
 
 /// 聊天室业务抽象基类
@@ -42,6 +50,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 发言消息，生成发言模型并提交该消息
 - (BOOL)speakMessage:(NSString *)message;
 
+/// 获取 count 条历史聊天记录
+- (void)loadHistoryDataWithCount:(NSInteger)count;
+
 /// 点赞，会更新roomData中点赞数同时对点赞消息做优化提交
 - (void)likeAction;
 
@@ -52,13 +63,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark 子类需重写的方法
 
-/// 发言消息CellModel类型，返回类需为 PLVChatCell 子类型
+/// 发言消息CellModel类型，返回类需为 PLVChatBaseCell 子类型
 - (Class)speakChatCellClass;
 
 /// 发言消息CellModel类型，返回类需为 PLVChatCellModel 子类型
 - (Class)speakChatCellModelClass;
 
-/// 图片消息Cell类型，返回类需为 PLVChatCell 子类型
+/// 图片消息Cell类型，返回类需为 PLVChatBaseCell 子类型
 - (Class)imageChatCellClass;
 
 /// 图片消息CellModel类型，返回类需为 PLVChatCellModel 子类型

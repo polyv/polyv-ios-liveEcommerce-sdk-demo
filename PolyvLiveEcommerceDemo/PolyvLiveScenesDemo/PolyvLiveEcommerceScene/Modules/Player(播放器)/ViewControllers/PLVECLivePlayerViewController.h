@@ -11,13 +11,27 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class PLVECLivePlayerViewController;
+
+@protocol PLVECLivePlayerProtocol <NSObject>
+
+@optional
+
+/// 刷新皮肤的多码率和多线路的按钮
+- (void)playerController:(PLVECLivePlayerViewController *)playerController
+           codeRateItems:(NSArray <NSString *>*)codeRateItems
+                codeRate:(NSString *)codeRate
+                   lines:(NSUInteger)lines
+                    line:(NSInteger)line;
+
+@end
+
 /// 直播带货直播播放器视图控制器
 @interface PLVECLivePlayerViewController : UIViewController
 
-@property (nonatomic, strong, readonly) PLVLivePlayerPresenter *presenter;
+@property (nonatomic, weak) id<PLVECLivePlayerProtocol> delegate;
 
-/// 横屏显示
-@property (nonatomic, assign) BOOL landscapeMode;
+@property (nonatomic, strong, readonly) PLVLivePlayerPresenter *presenter;
 
 /// 播放直播
 - (void)playLive;

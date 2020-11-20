@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// 改变视频所在窗口（主屏或副屏）的底色
 - (void)changePlayerScreenBackgroundColor:(PLVBasePlayerPresenter *)presenter;
 
+/// 主播放器获取到播放视频源的大小时执行回调
+- (void)presenter:(PLVBasePlayerPresenter *)presenter videoSizeChange:(CGSize)videoSize;
+
 /// 主播放器已准备好开始播放正片
 - (void)presenter:(PLVBasePlayerPresenter *)presenter mainPlaybackIsPreparedToPlay:(NSDictionary *)dataInfo;
 
@@ -52,6 +55,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PLVLiveRoomData *roomData;
 
 - (void)setupPlayerWithDisplayView:(UIView *)displayView;
+
+/// 根据视频源大小重新设置播放器大小、位置
+- (void)setPlayerFrame:(CGRect)rect;
 
 - (void)destroy;
 

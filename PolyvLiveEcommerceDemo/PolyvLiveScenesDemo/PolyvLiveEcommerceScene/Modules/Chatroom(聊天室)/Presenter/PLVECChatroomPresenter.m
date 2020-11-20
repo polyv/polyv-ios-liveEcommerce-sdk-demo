@@ -10,7 +10,23 @@
 #import "PLVECChatCell.h"
 #import "PLVECChatCellModel.h"
 
+@interface PLVECChatroomPresenter ()
+/// 是否已加载过历史消息（仅限第一次），默认 NO
+@property (nonatomic, assign) BOOL loadedHistory;
+
+@end
+
 @implementation PLVECChatroomPresenter
+
+#pragma mark Public Method
+
+- (void)loadHistoryAtFirstTime {
+    if (self.loadedHistory) {
+        return;
+    }
+    self.loadedHistory = YES;
+    [self loadHistoryDataWithCount:10];
+}
 
 #pragma mark - Override
 

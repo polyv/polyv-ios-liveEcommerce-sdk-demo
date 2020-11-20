@@ -7,17 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PLVChatModel.h"
+#import "PLVChatMessageModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class PLVChatCell, UITableView;
+@class PLVChatBaseCell, UITableView;
 
 @interface PLVChatCellModel : NSObject
 
-@property (nonatomic, strong) PLVChatModel *chatModel;
+@property (nonatomic, strong) PLVChatMessageModel *chatModel;
 
-@property (nonatomic, weak) PLVChatCell *cell;
+@property (nonatomic, weak) PLVChatBaseCell *cell;
 
 @property (nonatomic, assign) float cellHeight;
 
@@ -28,10 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL emitSuccess;   // default YES
 
 /// 子类重写方法
-- (void)reloadModelWithChatModel:(PLVChatModel *)chatModel;
+- (void)reloadModelWithChatModel:(PLVChatMessageModel *)chatModel;
 
 /// 使用CELL模型数据生成一个CELL
-- (PLVChatCell *)makeCellWithTableView:(UITableView *)tableView;
+- (PLVChatBaseCell *)makeCellWithTableView:(UITableView *)tableView;
 
 @end
 

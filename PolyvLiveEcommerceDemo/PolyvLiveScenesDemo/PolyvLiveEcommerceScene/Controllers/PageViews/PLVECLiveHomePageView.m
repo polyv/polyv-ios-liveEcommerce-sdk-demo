@@ -17,8 +17,18 @@
 @property (nonatomic, strong) PLVECRewardController *rewardCtrl;
 
 @property (nonatomic, strong) PLVECCommodityPushView *pushView;
-
+/// 码率列表
+@property (nonatomic, copy) NSArray<NSString *> *codeRateItems;
+/// 当前码率
+@property (nonatomic, assign) NSUInteger curCodeRateIndex;
+/// 线路数
 @property (nonatomic, assign) NSUInteger lineCount;
+/// 当前线路
+@property (nonatomic, assign) NSUInteger curlineIndex;
+/// 音频模式，默认NO，为视频模式
+@property (nonatomic, assign) BOOL audioMode;
+/// 线路数
+@property (nonatomic, assign) BOOL hiddenCodeRateSwitch;
 
 @property (nonatomic, assign) CGRect originGiftViewFrame;
 
@@ -92,6 +102,9 @@
     if (_switchLineView && !_switchLineView.hidden) {
         _switchLineView.hidden = YES;
     }
+    if (_switchCodeRateView && !_switchCodeRateView.hidden) {
+        _switchCodeRateView.hidden = YES;
+    }
     if (_commodityView && !_commodityView.hidden) {
         _commodityView.hidden = YES;
         [_commodityView clearCommodityInfo];
@@ -121,6 +134,7 @@
         _switchLineView = [[PLVECSwitchView alloc] initWithFrame:self.moreView.frame];
         _switchLineView.titleLable.text = @"切换线路";
         _switchLineView.delegate = self;
+        _switchLineView.selectedIndex = self.curlineIndex;
         [self addSubview:_switchLineView];
         
         [_switchLineView setCloseButtonActionBlock:^(PLVECBottomView * _Nonnull view) {
@@ -128,6 +142,37 @@
         }];
     }
     return _switchLineView;
+}
+
+- (PLVECSwitchView *)switchCodeRateView {
+    if (!_switchCodeRateView) {
+        _switchCodeRateView = [[PLVECSwitchView alloc] initWithFrame:self.moreView.frame];
+        _switchCodeRateView.titleLable.text = @"切换清晰度";
+        _switchCodeRateView.delegate = self;
+        _switchCodeRateView.selectedIndex = self.curCodeRateIndex;
+        [self addSubview:_switchCodeRateView];
+        
+        [_switchCodeRateView setCloseButtonActionBlock:^(PLVECBottomView * _Nonnull view) {
+            [view setHidden:YES];
+        }];
+    }
+    return _switchCodeRateView;
+}
+
+- (void)setAudioMode:(BOOL)audioMode {
+    if (_audioMode == audioMode) {
+        return;
+    }
+    _audioMode = audioMode;
+    self.hiddenCodeRateSwitch = audioMode || (!self.codeRateItems || [self.codeRateItems count] == 0);
+}
+
+- (void)setHiddenCodeRateSwitch:(BOOL)hiddenCodeRateSwitch {
+    if (_hiddenCodeRateSwitch == hiddenCodeRateSwitch) {
+        return;
+    }
+    _hiddenCodeRateSwitch = hiddenCodeRateSwitch;
+    [self.moreView reloadData];
 }
 
 - (PLVECCommodityView *)commodityView {
@@ -196,8 +241,8 @@
     }];
 }
 
-- (void)updateWatchViewCount:(NSUInteger)watchViewCount {
-    self.liveRoomInfoView.pageViewLB.text = [NSString stringWithFormat:@"%lu",(unsigned long)watchViewCount];
+- (void)updateOnlineCount:(NSUInteger)onlineCount {
+    self.liveRoomInfoView.pageViewLB.text = [NSString stringWithFormat:@"%lu",(unsigned long)onlineCount];
 }
 
 - (void)updateLikeCount:(NSUInteger)likeCount {
@@ -208,14 +253,34 @@
     self.likeLable.text = countStr;
 }
 
-- (void)updateLineCount:(NSUInteger)lineCount {
+- (void)updateLineCount:(NSUInteger)lineCount defaultLine:(NSUInteger)line {
+    if (lineCount == self.lineCount) {
+        return;
+    }
     self.lineCount = lineCount;
+    self.curlineIndex = line;
+    [self.moreView reloadData];
+}
+
+- (void)updateCodeRateItems:(NSArray <NSString *>*)codeRates defaultCodeRate:(NSString *)codeRate {
+    self.codeRateItems = codeRates;
+    for (int i = 0; i < [codeRates count]; i++) {
+        NSString *codeRateItem = codeRates[i];
+        if ([codeRateItem isEqualToString:codeRate]) {
+            self.curCodeRateIndex = i;
+            break;
+        }
+    }
+    self.hiddenCodeRateSwitch = self.audioMode || (!codeRates || [codeRates count] == 0);
 }
 
 - (void)updatePlayerState:(BOOL)playing {
     if (_moreView) {
         if (!_moreView.isHidden) {
             [_moreView setItemsHidden:!playing];
+        }
+        if (!_switchLineView.isHidden && !playing) {
+            _switchLineView.hidden = YES;
         }
         if (!_switchLineView.isHidden && !playing) {
             _switchLineView.hidden = YES;
@@ -272,17 +337,30 @@
 #pragma mark <PLVECMoreViewDelegate>
 
 - (NSArray<PLVECMoreViewItem *> *)dataSourceOfMoreView:(PLVECMoreView *)moreView {
+    NSMutableArray *muArray = [[NSMutableArray alloc] initWithCapacity:3];
+    
     PLVECMoreViewItem *item1 = [[PLVECMoreViewItem alloc] init];
     item1.title = @"音频模式";
     item1.selectedTitle = @"视频模式";
     item1.iconImageName = @"plv_audioSwitch_btn";
     item1.selectedIconImageName = @"plv_videoSwitch_btn";
+    item1.selected = self.audioMode;
+    [muArray addObject:item1];
     
-    PLVECMoreViewItem *item2 = [[PLVECMoreViewItem alloc] init];
-    item2.title = @"切换线路";
-    item2.iconImageName = @"plv_lineSwitch_btn";
+    if (self.lineCount > 1) {
+        PLVECMoreViewItem *item2 = [[PLVECMoreViewItem alloc] init];
+        item2.title = @"切换线路";
+        item2.iconImageName = @"plv_lineSwitch_btn";
+        [muArray addObject:item2];
+    }
     
-    return @[item1, item2];
+    if (!self.hiddenCodeRateSwitch) {
+        PLVECMoreViewItem *item3 = [[PLVECMoreViewItem alloc] init];
+        item3.title = @"清晰度";
+        item3.iconImageName = @"plv_codeRateSwitch_btn";
+        [muArray addObject:item3];
+    }
+    return [muArray copy];
 }
 
 - (void)moreView:(PLVECMoreView *)moreView didSelectItem:(PLVECMoreViewItem *)item index:(NSUInteger)index {
@@ -291,6 +369,7 @@
             if ([self.delegate respondsToSelector:@selector(homePageView:switchAudioMode:)]) {
                 [self.delegate homePageView:self switchAudioMode:item.isSelected];
             }
+            self.audioMode = item.isSelected;
         } break;
         case 1: {
             moreView.hidden = YES;
@@ -305,6 +384,13 @@
                 }
             }
         } break;
+        case 2: {
+            moreView.hidden = YES;
+            self.switchCodeRateView.hidden = NO;
+            if (!self.switchCodeRateView.items || self.switchCodeRateView.items.count == 0) {
+                self.switchCodeRateView.items = self.codeRateItems;
+            }
+        } break;
         default:
             break;
     }
@@ -313,12 +399,17 @@
 #pragma mark <PLVPlayerSwitchViewDelegate>
 
 - (void)playerSwitchView:(PLVECSwitchView *)playerSwitchView didSelectItem:(NSString *)item {
-    [playerSwitchView setHidden:YES];
-    NSUInteger line = [[item substringFromIndex:2] integerValue];
-    if ([self.delegate respondsToSelector:@selector(homePageView:switchPlayLine:)]) {
-        [self.delegate homePageView:self switchPlayLine:line];
+    if (playerSwitchView == _switchLineView) {
+        self.curlineIndex = [[item substringFromIndex:2] integerValue] - 1;
+        if ([self.delegate respondsToSelector:@selector(homePageView:switchPlayLine:)]) {
+            [self.delegate homePageView:self switchPlayLine:self.curlineIndex];
+        }
+    } else if (playerSwitchView == _switchCodeRateView) {
+        if ([self.delegate respondsToSelector:@selector(homePageView:switchCodeRate:)]) {
+            [self.delegate homePageView:self switchCodeRate:item];
+        }
     }
-    [self.delegate homePageView:self switchPlayLine:line];
+    [playerSwitchView setHidden:YES];
 }
 
 #pragma mark - 点赞业务逻辑

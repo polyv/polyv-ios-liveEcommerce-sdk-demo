@@ -56,7 +56,6 @@
     // 初始化播放器控制器、绑定视图、设置代理
     self.playerVC = [[PLVECPlaybackPlayerViewController alloc] init];
     self.playerVC.presenter.roomData = self.presenter.roomData;
-    self.playerVC.landscapeMode = self.landscapeMode;
     self.playerVC.delegate = self;
     
     self.playerVC.view.frame = self.view.bounds;

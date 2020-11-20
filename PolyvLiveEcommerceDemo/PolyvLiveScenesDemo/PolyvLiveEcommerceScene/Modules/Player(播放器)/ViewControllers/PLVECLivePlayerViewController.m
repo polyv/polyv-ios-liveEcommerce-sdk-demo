@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UILabel *noLiveLabel;
 
 @property (nonatomic, strong) UIView *displayView; // 显示视频区域
+@property (nonatomic, assign) CGRect displayRect;
 
 @property (nonatomic, strong) PLVECAudioAnimalView *audioAnimalView; // 显示音频模式
 
@@ -52,13 +53,8 @@
     backgroundImg.image = [PLVECUtils imageForWatchResource:@"plv_background_img"];
     [self.view addSubview:backgroundImg];
     
-    self.displayView = [[UIView alloc] init];
-    self.displayView.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:self.displayView];
-    
     self.backgroundView = [[UIView alloc] init];
     self.backgroundView.backgroundColor = [UIColor blackColor];
-    self.backgroundView.hidden = YES;
     [self.view addSubview:self.backgroundView];
     
     UIImage *noLiveImage = [PLVECUtils imageForWatchResource:@"plv_skin_player_background"];
@@ -72,6 +68,11 @@
     self.noLiveLabel.font = [UIFont systemFontOfSize:14.0];
     [self.backgroundView addSubview:self.noLiveLabel];
     
+    self.displayView = [[UIView alloc] init];
+    self.displayView.backgroundColor = [UIColor blackColor];
+    self.displayView.hidden = YES;
+    [self.view addSubview:self.displayView];
+    
     [self layoutViewsFrame];
 }
 
@@ -81,15 +82,8 @@
     self.noLiveImgView.frame = CGRectMake(CGRectGetWidth(self.backgroundView.bounds)/2-77, CGRectGetHeight(self.backgroundView.bounds)/2-60, 154, 120);
     self.noLiveLabel.frame = CGRectMake(CGRectGetWidth(self.backgroundView.bounds)/2-100, CGRectGetMaxY(self.noLiveImgView.frame)+12, 200, 14);
     
-    if (self.landscapeMode) {
-        // 16:9 显示模式
+    if (CGRectEqualToRect(self.displayRect, CGRectZero)) {
         self.displayView.frame = self.backgroundView.frame;
-    } else {
-        // 9:16 显示模式(刘海全屏裁剪)
-        self.displayView.frame = CGRectMake(-(CGRectGetHeight(self.view.bounds) / scale - CGRectGetWidth(self.view.bounds)) / 2, 0, CGRectGetHeight(self.view.bounds) / scale, CGRectGetHeight(self.view.bounds));
-        
-        // 9:16 显示模式(刘海非全屏不裁剪)
-        //self.playerSuperView.frame = self.view.bounds;
     }
 }
 
@@ -159,13 +153,23 @@
 #pragma mark - <PLVLivePlayerPresenterDelegate>
 
 - (void)presenter:(PLVLivePlayerPresenter *)presenter livePlayerStateDidChange:(LivePlayerState)livePlayerState {
-    self.backgroundView.hidden = YES;
-    switch (livePlayerState) {
-        case LivePlayerStateEnd:
-            self.backgroundView.hidden = NO;
-            break;
-        default:
-            break;
+    if (livePlayerState == LivePlayerStateUnknown || livePlayerState == LivePlayerStateEnd) {
+        self.displayView.hidden = YES;
+        self.displayRect = self.backgroundView.frame;
+        self.displayView.frame = self.displayRect;
+    } else {
+        self.displayView.hidden = NO;
+    }
+}
+
+- (void)presenterChannelPlayOptionInfoDidUpdate:(PLVLivePlayerPresenter *)presenter {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(playerController:codeRateItems:codeRate:lines:line:)]) {
+        PLVLiveRoomData *roomData = presenter.roomData;
+        [self.delegate playerController:self
+                          codeRateItems:roomData.codeRateItems
+                               codeRate:roomData.curCodeRate
+                                  lines:roomData.lines
+                                   line:roomData.curLine];
     }
 }
 
@@ -175,6 +179,36 @@
     [hud.label setText:@"播放器加载失败"];
     hud.detailsLabel.text = message;
     [hud hideAnimated:YES afterDelay:2];
+}
+
+- (void)presenter:(PLVBasePlayerPresenter *)presenter videoSizeChange:(CGSize)videoSize {
+    CGSize viewSize = self.view.bounds.size;
+    if (videoSize.width == 0 || videoSize.height == 0 || viewSize.width == 0 || viewSize.height == 0) {
+        return;
+    }
+    if (videoSize.width >= videoSize.height) {
+        CGFloat width = viewSize.width;
+        CGFloat height = width * videoSize.height / videoSize.width;
+        self.displayRect = CGRectMake(0, 130, width, height);
+    } else {
+        CGFloat w_h = videoSize.width / videoSize.height;
+        CGFloat w_h_base = viewSize.width / viewSize.height;
+        CGRect displayerRect = self.view.bounds;
+        if (w_h > w_h_base) {
+            displayerRect.origin.y = 0;
+            displayerRect.size.height = viewSize.height;
+            displayerRect.size.width = viewSize.height * w_h;
+            displayerRect.origin.x = (viewSize.width - displayerRect.size.width) / 2.0;
+        } else if (w_h < w_h_base) {
+            displayerRect.origin.x = 0;
+            displayerRect.size.width = viewSize.width;
+            displayerRect.size.height = viewSize.width / w_h;
+            displayerRect.origin.y = (viewSize.height - displayerRect.size.height) / 2.0;
+        }
+        self.displayRect = displayerRect;
+    }
+    self.displayView.frame = self.displayRect;
+    [self.presenter setPlayerFrame:self.displayView.bounds];
 }
 
 @end

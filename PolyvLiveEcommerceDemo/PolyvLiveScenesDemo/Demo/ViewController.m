@@ -108,7 +108,6 @@ static NSString *kPLVUserDefaultLoginInfoKey = @"kPLVUserDefaultLoginInfoKey_dem
         
         // 设置直播观看页相关配置、进入观看页
         PLVECLiveViewController * watchLiveVC = [[PLVECLiveViewController alloc] initWithLiveRoomData:roomData];
-        watchLiveVC.landscapeMode = !weakSelf.displayModeSwitch.isOn;
         
         if (PushOrModel) {
             [weakSelf.navigationController pushViewController:watchLiveVC animated:YES];
@@ -152,7 +151,6 @@ static NSString *kPLVUserDefaultLoginInfoKey = @"kPLVUserDefaultLoginInfoKey_dem
         
         // 进入回放观看页
         PLVECPlaybackViewController * watchPlaybackVC = [[PLVECPlaybackViewController alloc] initWithLiveRoomData:roomData];
-        watchPlaybackVC.landscapeMode = !weakSelf.displayModeSwitch.isOn;
         
         if (PushOrModel) {
             [weakSelf.navigationController pushViewController:watchPlaybackVC animated:YES];

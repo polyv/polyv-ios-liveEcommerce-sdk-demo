@@ -14,6 +14,7 @@
 #define KEYPATH_LIVEROOM_CHANNEL @"channelInfo"
 #define KEYPATH_LIVEROOM_LIKECOUNT @"likeCount"
 #define KEYPATH_LIVEROOM_VIEWCOUNT @"watchViewCount"
+#define KEYPATH_LIVEROOM_ONLINECOUNT @"onlineCount"
 #define KEYPATH_LIVEROOM_LIVESTATE @"liveState"
 #define KEYPATH_LIVEROOM_LINES @"lines"
 #define KEYPATH_LIVEROOM_DURATION @"duration"
@@ -37,9 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 点赞数
 @property (nonatomic, assign) NSUInteger likeCount;
-
 /// 观看热度
 @property (nonatomic, assign) NSUInteger watchViewCount;
+/// 在线人数
+@property (nonatomic, assign) NSUInteger onlineCount;
+
 
 /// 音频模式
 @property (nonatomic, assign) BOOL audioMode;

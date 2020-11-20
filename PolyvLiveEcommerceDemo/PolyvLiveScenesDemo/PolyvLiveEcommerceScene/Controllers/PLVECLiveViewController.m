@@ -15,7 +15,7 @@
 #import "PLVECLiveDetailPageView.h"
 #import "PLVECUtils.h"
 
-@interface PLVECLiveViewController () <PLVSocketObserverProtocol, PLVECLiveHomePageViewDelegate>
+@interface PLVECLiveViewController () <PLVSocketObserverProtocol, PLVECLiveHomePageViewDelegate, PLVECLivePlayerProtocol>
 
 // UI视图
 @property (nonatomic, strong) PLVECLiveHomePageView *homePageView;
@@ -60,9 +60,9 @@
     // 初始化直播播放器模块、添加视图
     self.playerVC = [[PLVECLivePlayerViewController alloc] init];
     self.playerVC.presenter.roomData = self.presenter.roomData;
-    self.playerVC.landscapeMode = self.landscapeMode;
     
     self.playerVC.view.frame = self.view.bounds;
+    self.playerVC.delegate = self;
     [self.view insertSubview:self.playerVC.view atIndex:0];
     
     // 初始化聊天室模块、绑定视图
@@ -173,19 +173,17 @@
 - (void)observeRoomData {
     PLVLiveRoomData *roomData = self.presenter.roomData;
     [roomData addObserver:self forKeyPath:KEYPATH_LIVEROOM_CHANNEL options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
-    [roomData addObserver:self forKeyPath:KEYPATH_LIVEROOM_VIEWCOUNT options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
+    [roomData addObserver:self forKeyPath:KEYPATH_LIVEROOM_ONLINECOUNT options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
     [roomData addObserver:self forKeyPath:KEYPATH_LIVEROOM_LIKECOUNT options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
     [roomData addObserver:self forKeyPath:KEYPATH_LIVEROOM_LIVESTATE options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
-    [roomData addObserver:self forKeyPath:KEYPATH_LIVEROOM_LINES options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)removeObserveRoomData {
     PLVLiveRoomData *roomData = self.presenter.roomData;
     [roomData removeObserver:self forKeyPath:KEYPATH_LIVEROOM_CHANNEL];
-    [roomData removeObserver:self forKeyPath:KEYPATH_LIVEROOM_VIEWCOUNT];
+    [roomData removeObserver:self forKeyPath:KEYPATH_LIVEROOM_ONLINECOUNT];
     [roomData removeObserver:self forKeyPath:KEYPATH_LIVEROOM_LIKECOUNT];
     [roomData removeObserver:self forKeyPath:KEYPATH_LIVEROOM_LIVESTATE];
-    [roomData removeObserver:self forKeyPath:KEYPATH_LIVEROOM_LINES];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
@@ -205,14 +203,12 @@
                 self.homePageView.shoppingCardButton.hidden = NO;
             }
         }
-    } else if ([keyPath isEqualToString:KEYPATH_LIVEROOM_VIEWCOUNT]) { // 观看热度
-        [self.homePageView updateWatchViewCount:roomData.watchViewCount];
+    } else if ([keyPath isEqualToString:KEYPATH_LIVEROOM_ONLINECOUNT]) { // 在线人数
+        [self.homePageView updateOnlineCount:roomData.onlineCount];
     } else if ([keyPath isEqualToString:KEYPATH_LIVEROOM_LIKECOUNT]) { // 点赞数
         [self.homePageView updateLikeCount:roomData.likeCount];
     } else if ([keyPath isEqualToString:KEYPATH_LIVEROOM_LIVESTATE]) { // 直播状态
         [self.homePageView updatePlayerState:roomData.liveState == PLVLiveStreamStateLive];
-    } else if ([keyPath isEqualToString:KEYPATH_LIVEROOM_LINES]) {     // 多线路
-        [self.homePageView updateLineCount:roomData.lines];
     }
 }
 
@@ -222,7 +218,9 @@
     NSString *userIdForWatchUser = self.presenter.roomData.userIdForWatchUser;
     
     NSString *subEvent = PLV_SafeStringForDictKey(jsonDict, @"EVENT");
-    if ([subEvent isEqualToString:@"BULLETIN"]) {               // 公告消息
+    if ([subEvent isEqualToString:@"LOGIN"]) {
+        [self.chatroomPresenter loadHistoryAtFirstTime];
+    } else if ([subEvent isEqualToString:@"BULLETIN"]) {               // 公告消息
         NSString *content = PLV_SafeStringForDictKey(jsonDict, @"content");
         [self.homePageView showBulletinView:content];
         [self.detailPageView addBulletinCardView:content];
@@ -255,6 +253,17 @@
     [self.homePageView receiveCustomMessage:jsonDict];
 }
 
+#pragma mark - PLVECLivePlayer Protocol
+
+- (void)playerController:(PLVECLivePlayerViewController *)playerController
+           codeRateItems:(NSArray <NSString *>*)codeRateItems
+                codeRate:(NSString *)codeRate
+                   lines:(NSUInteger)lines
+                    line:(NSInteger)line {
+    [self.homePageView updateCodeRateItems:codeRateItems defaultCodeRate:codeRate];
+    [self.homePageView updateLineCount:lines defaultLine:line];
+}
+
 #pragma mark - <PLVECLiveHomePageViewDelegate>
 
 - (PLVLiveRoomData *)currentLiveRoomData {
@@ -263,6 +272,10 @@
 
 - (void)homePageView:(PLVECLiveHomePageView *)homePageView switchPlayLine:(NSUInteger)line {
     [self.playerVC switchPlayLine:line showHud:NO];
+}
+
+- (void)homePageView:(PLVECLiveHomePageView *)homePageView switchCodeRate:(NSString *)codeRate {
+    [self.playerVC switchPlayCodeRate:codeRate showHud:NO];
 }
 
 - (void)homePageView:(PLVECLiveHomePageView *)homePageView switchAudioMode:(BOOL)audioMode {

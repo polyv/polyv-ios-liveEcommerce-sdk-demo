@@ -28,17 +28,10 @@
 @implementation PLVECMoreView
 
 - (void)reloadData {
-    if (self.items)
-        return;
-    
-    if ([self.delegate respondsToSelector:@selector(dataSourceOfMoreView:)]) {
-        self.items = [self.delegate dataSourceOfMoreView:self];
+    if (self.delegate) {
+        NSArray *items = [self.delegate dataSourceOfMoreView:self];
+        [self setupUIWithItems:items];
     }
-    if (!self.items || !self.items.count) {
-        return;
-    }
-    
-    [self setupUI];
 }
 
 - (void)setItemsHidden:(BOOL)hidden {
@@ -49,7 +42,13 @@
 
 #pragma mark - Private
 
-- (void)setupUI {
+- (void)setupUIWithItems:(NSArray<PLVECMoreViewItem *> *)item {
+    for (PLVECMoreViewItem *item in self.items) {// 移除原来的子视图
+        UIView *subView = [self viewWithTag:item.tag];
+        [subView removeFromSuperview];
+    }
+    
+    self.items = item;
     for (int i = 0; i < self.items.count; i++) {
         PLVECMoreViewItem *item = self.items[i];
         item.tag = 200 + i;
@@ -57,7 +56,7 @@
         UIButton *itemBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         itemBtn.frame = CGRectMake(12 + 72*i, 46, 50, 54);
         itemBtn.tag = item.tag;
-        
+        itemBtn.selected = item.isSelected;
         [itemBtn setTitle:item.title forState:UIControlStateNormal];
         if (item.selectedTitle) {
             [itemBtn setTitle:item.selectedTitle forState:UIControlStateSelected];

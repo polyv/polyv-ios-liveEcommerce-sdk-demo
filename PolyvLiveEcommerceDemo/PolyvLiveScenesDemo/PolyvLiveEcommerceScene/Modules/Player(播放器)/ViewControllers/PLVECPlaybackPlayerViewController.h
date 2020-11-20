@@ -27,9 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) id<PLVECPlaybackPlayerViewControlDelegate> delegate;
 
-/// 横屏显示
-@property (nonatomic, assign) BOOL landscapeMode;
-
 - (void)play;
 
 - (void)pause;
